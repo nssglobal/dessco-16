@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_delivery_order_document">
+        <t t-call="web.external_layout">
+            <t t-set="doc" t-value="doc.with_context(lang=doc.partner_id.lang)"/>
+            <t t-set="so_id" t-value="doc.get_sale_order_data()"/>
+            <div class="row" style="MARGIN-BOTTOM: 5%;">
+                <div class="col-8">
+                    <strong t-if="so_id.partner_shipping_id == so_id.partner_invoice_id">Customer Details:</strong>
+                    <strong t-if="so_id.partner_shipping_id != so_id.partner_invoice_id">Invoicing Address:</strong>
+                    <div t-field="so_id.partner_invoice_id"
+                         t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;, &quot;phone&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"/>
+                    <p t-if="so_id.partner_id.vat"><t t-esc="so_id.company_id.country_id.vat_label or 'Tax ID'"/>:
+                        <span t-field="so_id.partner_id.vat"/>
+                    </p>
+                    <t t-if="so_id.partner_shipping_id != so_id.partner_invoice_id">
+                        <strong>Shipping Address:</strong>
+                        <div t-esc="so_id.partner_shipping_id"
+                             t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;, &quot;phone&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"/>
+                    </t>
+                </div>
+                <div class="col-4">
+                    <h2 class="mt16">
+                        <span t-field="doc.name"/>
+                    </h2>
+                    <div t-if="doc.state" name="div_sched_date" class="mw-100 mb-2">
+                        <strong>Date of Delivery:</strong>
+                        <t t-if="doc.state == 'done'">
+                            <p class="m-0" t-field="doc.date_done"/>
+                        </t>
+                    </div>
+                    <div t-if="doc.origin" class="mw-100 mb-2">
+                        <strong>Source Document:</strong>
+                        <t t-if="doc.origin">
+                            <p class="m-0" t-field="doc.origin"/>
+                        </t>
+                    </div>
+                    <div t-if="so_id.user_id.name" class="mw-100 mb-2">
+                        <strong>Salesperson:</strong>
+                        <p class="m-0" t-field="so_id.user_id"/>
+                        <p class="m-0" t-field="so_id.user_id.partner_id.mobile"/>
+                    </div>
+                    <div t-if="doc.delivery_person" class="mw-100 mb-2">
+                        <strong>Delivery Person:</strong>
+                        <p class="m-0" t-field="doc.delivery_person"/>
+                        <p class="m-0" t-field="doc.delivery_person_mobile"/>
+                    </div>
+                </div>
+
+            </div>
+            <div class="page">
+                <div class="oe_structure"/>
+                <table class="table table-sm" t-if="doc.state!='done'" name="stock_move_table">
+                    <thead>
+                        <tr>
+                            <th name="th_sm_product">
+                                <strong>Product</strong>
+                            </th>
+                            <th name="th_sm_quantity">
+                                <strong>Quantity</strong>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--                            <t t-set="lines" t-value="doc.move_lines.filtered(lambda x: x.product_uom_qty)"/>-->
+                        <t t-set="lines" t-value="doc.move_ids_without_package.filtered(lambda x: x.product_uom_qty)"/>
+                        <t t-set="lines" t-value="doc.move_ids_without_package.filtered(lambda x: x.product_uom_qty)"/>
+                        <tr t-foreach="lines" t-as="move">
+                            <td>
+                                <span t-field="move.product_id"/>
+                                <p t-if="move.description_picking != move.product_id.name">
+                                    <span t-field="move.description_picking"/>
+                                </p>
+                            </td>
+                            <td>
+                                <span t-field="move.product_uom_qty"/>
+                                <span t-field="move.product_uom"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table table-sm mt48" t-if="doc.move_line_ids and doc.state=='done'"
+                       name="stock_move_line_table">
+                    <t t-set="has_serial_number" t-value="False"/>
+                    <t t-set="has_serial_number" t-value="doc.move_line_ids.mapped('lot_id')"
+                       groups="stock.group_lot_on_delivery_slip"/>
+                    <thead>
+                        <tr>
+                            <th name="th_sml_product">
+                                <strong>Product</strong>
+                            </th>
+                            <t name="lot_serial" t-if="has_serial_number">
+                                <th>
+                                    Lot/Serial Number
+                                </th>
+                            </t>
+                            <th name="th_sml_quantity" class="text-center">
+                                <strong>Quantity</strong>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- This part gets complicated with different use cases (additional use cases in extensions of this report):
+                                1. If serial numbers are used and set to print on delivery slip => print lines as is, otherwise group them by overlapping
+                                    product + description + uom combinations
+                                2. If any packages are assigned => split products up by package (or non-package) and then apply use case 1 -->
+                        <!-- If has destination packages => create sections of corresponding products -->
+                        <t t-if="doc.has_packages" name="has_packages">
+                            <t t-set="packages" t-value="doc.move_line_ids.mapped('result_package_id')"/>
+                            <t t-foreach="packages" t-as="package">
+                                <t t-call="stock.stock_report_delivery_package_section_line"/>
+                                <t t-set="package_move_lines"
+                                   t-value="doc.move_line_ids.filtered(lambda l: l.result_package_id == package)"/>
+                                <!-- If printing lots/serial numbers => keep products in original lines -->
+                                <t t-if="has_serial_number">
+                                    <tr t-foreach="package_move_lines" t-as="move_line">
+                                        <t t-call="stock.stock_report_delivery_has_serial_move_line"/>
+                                    </tr>
+                                </t>
+                                <!-- If not printing lots/serial numbers => merge lines with same product+description+uom -->
+                                <t t-else="">
+                                    <t t-set="aggregated_lines"
+                                       t-value="package_move_lines._get_aggregated_product_quantities()"/>
+                                    <t t-call="stock.stock_report_delivery_aggregated_move_lines"/>
+                                </t>
+                            </t>
+                            <!-- Make sure we do another section for package-less products if they exist -->
+                            <t t-set="move_lines"
+                               t-value="doc.move_line_ids.filtered(lambda l: not l.result_package_id)"/>
+                            <t t-if="move_lines" name="no_package_move_lines">
+                                <t t-call="stock.stock_report_delivery_no_package_section_line"
+                                   name="no_package_section"/>
+                                <t t-if="has_serial_number">
+                                    <tr t-foreach="move_lines" t-as="move_line">
+                                        <t t-call="stock.stock_report_delivery_has_serial_move_line"/>
+                                    </tr>
+                                </t>
+                                <t t-else="">
+                                    <t t-set="aggregated_lines"
+                                       t-value="move_lines._get_aggregated_product_quantities()"/>
+                                    <t t-if="aggregated_lines">
+                                        <t t-call="stock.stock_report_delivery_aggregated_move_lines"/>
+                                    </t>
+                                </t>
+                            </t>
+                        </t>
+                        <!-- No destination packages -->
+                        <t t-else="">
+                            <!-- If printing lots/serial numbers => keep products in original lines -->
+                            <t t-if="has_serial_number">
+                                <tr t-foreach="doc.move_line_ids" t-as="move_line">
+                                    <t t-call="stock.stock_report_delivery_has_serial_move_line"/>
+                                </tr>
+                            </t>
+                            <!-- If not printing lots/serial numbers => merge lines with same product -->
+                            <t t-else="" name="aggregated_move_lines">
+                                <t t-set="aggregated_lines"
+                                   t-value="doc.move_line_ids._get_aggregated_product_quantities()"/>
+                                <t t-call="stock.stock_report_delivery_aggregated_move_lines"/>
+                            </t>
+                        </t>
+                    </tbody>
+                </table>
+
+                <div class="oe_structure"/>
+                <p t-if="so_id.payment_term_id.note">
+                    <span t-field="so_id.payment_term_id.note"/>
+                </p>
+                <p t-field="doc.note"/>
+                <div class="mw-100 mb-2" style="margin-top:150px">
+                    <div class="row">
+                        <div class="col-4">
+                        </div>
+                        <div class="col-3">
+                        </div>
+                        <div class="col-5">
+                            <table class="table border-collapse:collapse">
+                                <tbody>
+                                    <tr>
+                                        <td style="width:50%">Name</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:50%">Contact Details</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:50%;">Signature</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width:50%;height:75px">Seal</td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!-- <div style="text-align: left;"><strong>Name : </strong></div>
+                            <div style="text-align: left;"><strong>Contact Details:</strong></div>
+                            <div style="text-align: left;"><strong>Signature : </strong></div>
+                            <div style="text-align: left;"><strong>Seal : </strong></div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_delivery_order">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="stock_extension.report_delivery_order_document" t-lang="doc.partner_id.lang"/>
+            </t>
+        </t>
+    </template>
+
+</odoo>
