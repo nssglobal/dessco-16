@@ -8,19 +8,19 @@
         <field name="page_height">0</field>
         <field name="page_width">0</field>
         <field name="orientation">Portrait</field>
-        <field name="margin_top">5</field>
+        <field name="margin_top">30</field>
         <field name="margin_bottom">0</field>
         <field name="margin_left">2</field>
         <field name="margin_right">2</field>
         <field name="header_line" eval="False"/>
-        <field name="header_spacing">5</field>
+        <field name="header_spacing">25</field>
         <field name="dpi">90</field>
     </record>
 
     <report
             id="action_inv_report"
             model="account.move"
-            string="Tax Invoice"
+            string="Invoice Report"
             report_type="qweb-pdf"
             name="hak_inv_report.report_inv_document"
             file="hak_inv_report.report_inv_document"

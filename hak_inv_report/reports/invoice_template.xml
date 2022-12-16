@@ -1,63 +1,63 @@
 <odoo>
 
-    <template id="inv_report_header_footer">
-        <t t-set="company" t-value="res_company"/>
-        <!--        <div class="header" style="text-align: -moz-center;text-align: -webkit-center;width:280px;margin-top:10px;">-->
-        <div t-attf-class="header o_company_#{res_company.id}_layout" t-att-style="report_header_style" width="100%">
 
-
-            <!--                <table class="table table-borderless" style="border-collapse: collapse;border-collapse:separate;border-spacing:0 5px;">-->
-            <!--                    <tr >-->
-            <!--                        <td style="font-size: 15px;text-align:center;font-weight: bold;border:none;">-->
-            <!--                             مؤسسة حسين بن علوى مقيبل للتجارة-->
-            <!--                        </td>-->
-
-            <!--                    </tr>-->
-            <!--                    <tr >-->
-            <!--                        <td class="text-nowrap" style="font-size: 15px;text-align:center;font-weight: bold;border:none;">-->
-            <!--                            HUSSAIN BIN ALAWI MUQAIBAL TRD. EST.-->
-            <!--                        </td>-->
-
-            <!--                    </tr>-->
-            <!--                    <tr>-->
-            <!--                        <td style="text-align:center;background-color:black;color: white;">-->
-            <!--    &lt;!&ndash;                        <h4 >&ndash;&gt;-->
-            <!--                                <span style="font-weight:bold;" t-esc="docs.session_id.name"/>-->
-            <!--    &lt;!&ndash;                        </h4>&ndash;&gt;-->
-            <!--                        </td>-->
-            <!--                    </tr>-->
-            <!--    &lt;!&ndash;                <br/>&ndash;&gt;-->
-            <!--                    <tr style="border: 2px solid black;">-->
-            <!--                        <td style="text-align:center;font-weight: bold;border: 2px solid black;">-->
-            <!--    &lt;!&ndash;                        <h5 >&ndash;&gt;-->
-            <!--                                DAILY SALES REPORT-->
-            <!--    &lt;!&ndash;                        </h5>&ndash;&gt;-->
-            <!--                        </td>-->
-            <!--                    </tr>-->
-            <!--                </table>-->
-
-        </div>
-
-        <div t-attf-class="footer o_standard_footer o_company_#{res_company.id}_layout"  style="margin-top:15px; padding-top:20px;">
-            <div class="text-center" style="border-top: 1px solid black; margin-top:15px; padding-top:15px;">
-                <!--                    <ul class="list-inline">-->
-                <!--                        &lt;!&ndash;                    <t t-set="company" t-value="company.sudo()"/>&ndash;&gt;-->
-                <!--                        <li t-if="company.phone">Phone: <span t-field="company.phone"/></li>-->
-
-                <!--                        <li t-if="company.vat and company.phone">&amp;bull;</li>-->
-                <!--                        <li t-if="company.vat">Vat: <span t-field="company.vat"/></li>-->
-
-                <!--                        <li t-if="company.email and company.vat or company.email and company.phone">&amp;bull;</li>-->
-                <!--                        <li t-if="company.email">Email: <span t-field="company.email"/></li>-->
-
-                <!--                        <li t-if="company.website and company.email or company.website and company.vat or company.website and company.phone">&amp;bull;</li>-->
-                <!--                        <li t-if="company.website">Website: <span t-field="company.website"/></li>-->
-                <!--                    </ul>-->
-                <div name="financial_infos">
-                    <span t-field="res_company.report_footer"/>
+    <template id="custom_layout_with_header_footer">
+        <t t-set="company" t-value="user.company_id"/>
+        <div class="header">
+            <div class="row" style="font-family: 'Trebuchet MS', sans-serif;border:2px solid black;border-bottom:2px solid white;padding:5px;">
+                <div class="col-5 mb4" style="font-size:14px">
+                    <strong style="font-size:14px" t-field="company.partner_id.name"/>
+                    <br/>
+                    <span>C.R.:1059035</span>
+                    <br/>
+                    <span>Finance Code:30376601</span>
+                    <br/>
+                    <span>VAT IN:</span>
+                    <span t-field="company.vat"/>
+                    <br/>
                 </div>
-                <div t-if="report_type == 'pdf'" class="text-muted">
-                    Page: <span class="page"/> / <span class="topage"/>
+                <div class="col-2 mb4 text-center">
+                    <img t-if="company.logo" style="object-fit:contain;width:100%" t-att-src="image_data_uri(company.logo)" alt="Logo"/><br/>
+                    <span style="font-size:20px;"><strong>Tax Invoice</strong></span>
+                </div>
+                <div class="col-5 mb4" style="font-size:14px">
+                    <div style="text-align: right;">
+                        <strong style="font-size:14px">شركة ظفار للسلامة البيئية والخدمات ش.م.م </strong>
+                    </div>
+                    <div style="text-align: right;">س.ت. : ١٠٥٩٠٣٥</div>
+                    <div style="text-align: right;">قم المستفيد : ٣٠٣٧٦٦٠١</div>
+                    <div style="text-align: right;">OM١١٠٠٠١٩٧٢٢ o: مدخل ضريبة القيمة المضافة</div>
+                </div>
+            </div>
+        </div>
+        <div t-attf-class="o_company_#{company.id}_layout article o_report_layout mb4" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-call="web.address_layout"/>
+            <t t-raw="0"/>
+        </div>
+        <div class="footer">
+            <div t-if="company.logo or company.report_header" class="row zero_min_height">
+                <div class="col-12">
+                    <div style="border-bottom: 1px solid black;"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <div style="text-align: center;">Salalah 211</div>
+                    <div style="text-align: center;">Level 7, Al Abadi Bldg. No. 2</div>
+                    <div style="text-align: center;">23rd July Road, Post Box: 1127</div>
+                    <div style="text-align: center;">Salalah -211</div>
+                </div>
+                <div class="col-4">
+                    <div style="text-align: center;">Muscat</div>
+                    <div style="text-align: center;">Level 6, Business Center Bldg. #325</div>
+                    <div style="text-align: center;">Office # 608, Dohat Al Adab Street</div>
+                    <div style="text-align: center;">Al Khuwair South, Muscat 133,</div>
+                </div>
+                <div class="col-4">
+                    <div style="text-align: center;">Tel. : +968-2329-8084</div>
+                    <div style="text-align: center;">Fax: +968-2329-8083</div>
+                    <div style="text-align: center;">www.desscollc.com</div>
+                    <div style="text-align: center;">Email: contactus@desscollc.com</div>
                 </div>
             </div>
         </div>
@@ -67,42 +67,42 @@
     <template id="report_inv_document">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="o">
-                <div class="article o_report_layout_standard" t-att-data-oe-model="doc and doc._name"
-                     t-att-data-oe-id="doc and doc.id">
-                    <t t-call="hak_inv_report.inv_report_header_footer"/>
+                <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name"
+                     t-att-data-oe-id="o and o.id">
+                    <t t-call="hak_inv_report.custom_layout_with_header_footer"/>
                     <!--                <t t-call="web.external_layout">-->
                     <t t-set="o" t-value="o.with_context(lang=lang)" />
                     <!--                    <t t-set="company" t-value="res_company" />-->
                     <!--                <t t-set="forced_vat" t-value="o.fiscal_position_id.foreign_vat"/> &lt;!&ndash; So that it appears in the footer of the report instead of the company VAT if it's set &ndash;&gt;-->
 
-                    <div class="mt-5">
-                        <div class="page">
+                    <div class="mt-5" >
+                        <div class="page" >
                             <table class="table table-bordered" style="border:2px solid black;">
-                                <tr>
-                                    <td style="border-right:1px solid white;">
-                                        <div class="col-12" name="company_address" style="font-weight:bold;">
-                                            <span t-if="res_company.company_details" t-esc="res_company.company_details"/>
-                                            <span t-else="" t-esc="res_company.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: true}"/>
-                                        </div>
-                                    </td>
-                                    <td class="text-center" style="font-size:20px;border-right:1px solid white;">
-                                        <img t-if="res_company.logo" t-att-src="image_data_uri(res_company.logo)" style="max-height: 65px;" alt="Logo"/><br/><br/>
-                                        <span ><strong>Tax Invoice</strong></span>
-                                    </td>
-                                    <td>
-                                        <div class="col-12" name="company_address">
-                                            <span t-if="res_company.company_details" t-esc="res_company.company_details"/>
-                                            <span t-else="" t-esc="res_company.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: true}"/>
-                                        </div></td>
-                                </tr>
+<!--                                <tr>-->
+<!--                                    <td style="border-right:1px solid white;">-->
+<!--                                        <div class="col-12" name="company_address" style="font-weight:bold;">-->
+<!--                                            <span t-if="res_company.company_details" t-esc="res_company.company_details"/>-->
+<!--                                            <span t-else="" t-esc="res_company.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: true}"/>-->
+<!--                                        </div>-->
+<!--                                    </td>-->
+<!--                                    <td class="text-center" style="font-size:20px;border-right:1px solid white;">-->
+<!--                                        <img t-if="res_company.logo" t-att-src="image_data_uri(res_company.logo)" style="max-height: 65px;" alt="Logo"/><br/><br/>-->
+<!--                                        <span ><strong>Tax Invoice</strong></span>-->
+<!--                                    </td>-->
+<!--                                    <td>-->
+<!--                                        <div class="col-12" name="company_address">-->
+<!--                                            <span t-if="res_company.company_details" t-esc="res_company.company_details"/>-->
+<!--                                            <span t-else="" t-esc="res_company.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;], &quot;no_marker&quot;: true}"/>-->
+<!--                                        </div></td>-->
+<!--                                </tr>-->
                                 <tr style="padding:0px;">
 
                                     <td ><span style="font-weight:bold;">Buyer Details</span>
-                                            <address class="mb-0" t-field="o.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
-                                            <div t-if="o.partner_id.vat">
-                                                <t t-if="o.company_id.account_fiscal_country_id.vat_label" t-esc="o.company_id.account_fiscal_country_id.vat_label" id="inv_tax_id_label"/>
-                                                <t t-else="">Tax ID</t>: <span t-field="o.partner_id.vat"/>
-                                            </div>
+                                        <address class="mb-0" t-field="o.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
+                                        <div t-if="o.partner_id.vat">
+                                            <t t-if="o.company_id.account_fiscal_country_id.vat_label" t-esc="o.company_id.account_fiscal_country_id.vat_label" id="inv_tax_id_label"/>
+                                            <t t-else="">Tax ID</t>: <span t-field="o.partner_id.vat"/>
+                                        </div>
                                     </td>
                                     <td colspan="2" style="padding:0px;">
                                         <table class="table table-bordered" style="border:2px solid black;">
