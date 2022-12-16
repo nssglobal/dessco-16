@@ -81,7 +81,7 @@
                           <span>VAT IN:</span><span t-field="company.vat"/><br/>
                     </div>
                     <div class="col-2 mb4">
-                        <img t-if="company.logo" style="object-fit:contain;width:100%" t-att-src="image_data_uri(company.logo)"  alt="Logo"/>
+                        <img t-if="company.logo" style="object-fit:contain;width:65%" t-att-src="image_data_uri(company.logo)"  alt="Logo"/>
                     </div>
                     <div class="col-5 mb4" style="font-size:14px">
                             <div style="text-align: right;"><strong style="font-size:14px">شركة ظفار للسلامة البيئية والخدمات ش.م.م </strong>
