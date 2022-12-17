@@ -20,7 +20,7 @@
     <report
             id="action_inv_report"
             model="account.move"
-            string="TAX Invoice"
+            string="Tax Invoice"
             report_type="qweb-pdf"
             name="hak_inv_report.report_inv_document"
             file="hak_inv_report.report_inv_document"
