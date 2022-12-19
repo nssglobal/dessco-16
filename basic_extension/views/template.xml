@@ -43,13 +43,14 @@
             <t t-call="web.address_layout"/>
             <t t-raw="0"/>
         </div>
-        <div class="footer">
+<!--         <div class="footer">
             <div t-if="company.logo or company.report_header" class="row zero_min_height">
                 <div class="col-12">
                     <div style="border-bottom: 1px solid black;"/>
                 </div>
             </div>
             <div class="row">
+                <br></br>
                 <div class="col-4">
                     <div style="text-align: center;">Salalah 211</div>
                     <div style="text-align: center;">Level 7, Al Abadi Bldg. No. 2</div>
@@ -69,7 +70,7 @@
                     <div style="text-align: center;">Email: contactus@desscollc.com</div>
                 </div>
             </div>
-        </div>
+        </div> -->
         </template>
 
 
