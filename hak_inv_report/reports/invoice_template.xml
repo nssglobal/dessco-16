@@ -1,7 +1,7 @@
 <odoo>
 
 
-    <template id="custom_layout_with_header_footer">
+    <template id="tax_invoice_header_footer">
         <t t-set="company" t-value="user.company_id"/>
         <div class="header">
             <div class="row" style="font-family: 'Trebuchet MS', sans-serif;border:2px solid black;border-bottom:2px solid white;padding:5px;">
@@ -68,7 +68,7 @@
             <t t-foreach="docs" t-as="o">
                 <div class="article o_report_layout_standard" t-att-data-oe-model="o and o._name"
                      t-att-data-oe-id="o and o.id">
-                    <t t-call="hak_inv_report.custom_layout_with_header_footer"/>
+                    <t t-call="hak_inv_report.tax_invoice_header_footer"/>
                     <!--                <t t-call="web.external_layout">-->
                     <t t-set="o" t-value="o.with_context(lang=lang)" />
                     <!--                    <t t-set="company" t-value="res_company" />-->
