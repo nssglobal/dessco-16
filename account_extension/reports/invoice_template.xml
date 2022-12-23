@@ -32,12 +32,12 @@
 <!--                        </t>-->
                     </div>
                     <div class="col-4">
-                        <h2 class="mt16">
+                        <h4 class="mt16">
                             <t>
-                                <span>Invoice #</span>
-                            </t>
+                                <span>Invoice # </span>
+                            
                             <span t-field="doc.name"/>
-                        </h2>
+                        </h4>
                         <div class="mw-100 mb-2">
                             <strong>Invoice Date:</strong>
                             <p class="m-0" t-field="doc.invoice_date"/>
