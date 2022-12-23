@@ -71,9 +71,7 @@
 						<t t-set="total1" t-value="total1 + line.credit"/>
 						</t>
 						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
+							
 							<td></td>
 							<td></td>
 							<td><strong>Total:</strong></td>
