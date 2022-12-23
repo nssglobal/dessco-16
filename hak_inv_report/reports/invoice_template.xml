@@ -107,7 +107,7 @@
                                     <td colspan="5" style="font-weight:bold;">SALE PERSON CODE and TEL NO: <span t-field="o.invoice_user_id.name"/></td>
                                 </tr>
                                 <tr style="font-weight:bold;">
-                                    <td class="text-center" >NO</td>
+                                    <td class="text-center" width="5%">NO</td>
                                     <td colspan="2">DESCRIPTION</td>
                                     <td class="text-center">QTY</td>
                                     <td class="text-center">RATE</td>
@@ -123,7 +123,7 @@
                                     <td colspan="2"><span t-esc="line.name" /></td>
                                     <td class="text-center"><span t-esc="line.quantity"/></td>
                                     <td class="text-center"><span t-esc="line.price_unit"/></td>
-                                    <td class="text-center"><span t-esc="line.price_unit"/></td>
+                                    <td class="text-center"><span t-esc="line.product_uom_id.name"/></td>
                                     <td class="text-center" >
                                         <span t-esc="', '.join(map(lambda x: (x.description or x.name), line.tax_ids))"/>
                                     </td>
