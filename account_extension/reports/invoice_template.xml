@@ -31,9 +31,8 @@
 <!--                                 t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;, &quot;phone&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"/>-->
 <!--                        </t>-->
                     </div>
-                    <div class="col-4">
-                        <h4 class="mt16">
-              
+                    <div class="col-6">
+                        <h4>
                             Invoice # <span t-field="doc.name"/>
                         </h4>
                         <div class="mw-100 mb-2">
