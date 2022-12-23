@@ -19,6 +19,14 @@ class ProductTemplateInh(models.Model):
     def _onchange_product(self):
         for i in self:
             i.tax_id=i.product_id.taxes_id
+            
+class PurchaseOrderLine(models.Model):
+    _inherit = 'purchase.order.line'
+
+    @api.onchange("product_id")
+    def _onchange_product(self):
+        for i in self:
+            i.taxes_id=i.product_id.taxes_id
 
 
 
