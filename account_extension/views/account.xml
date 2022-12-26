@@ -6,7 +6,8 @@
 	        <field name="inherit_id" ref="account.view_move_form"/>
 	        <field name="arch" type="xml">
                 <xpath expr="//field[@name='ref']" position="after">
-                    <field name="pr_ref"/>
+                    <field name="do_number"/>
+			 <field name="lpo_number"/>
                 </xpath>
             </field>
 	    </record>
