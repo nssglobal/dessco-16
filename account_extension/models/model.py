@@ -8,8 +8,8 @@ class AccountMove(models.Model):
     _inherit = "account.move"
 
     pr_ref = fields.Char(string="PR ref")
-    do_numer=fields.Char(string="DO Number")
-    lpo_numer=fields.Char(string="LPO Number")
+    do_number=fields.Char(string="DO Number")
+    lpo_number=fields.Char(string="LPO Number")
 
 
 
