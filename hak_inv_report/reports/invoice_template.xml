@@ -95,13 +95,13 @@
                                     <td style="font-weight:bold;">DO No</td>
                                     <td colspan="2"><span t-field="o.do_number"/></td>
                                     <td class="text-center" style="font-weight:bold;">Date</td>
-                                    <td style=""></td>
+                                    <td style=""><span t-field="o.do_date"/></td>
                                 </tr>
                                 <tr>
                                     <td style="font-weight:bold;">LPO No</td>
                                     <td colspan="2"><span t-field="o.lpo_number"/></td>
                                     <td style="font-weight:bold;" class="text-center">Date</td>
-                                    <td style=""></td>
+                                    <td style=""><span t-field="o.lpo_date"/></td>
                                 </tr>
                                 <tr>
                                     <td colspan="5" style="font-weight:bold;">SALE PERSON CODE and TEL NO: <span t-field="o.invoice_user_id.name"/></td>
