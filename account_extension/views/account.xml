@@ -8,6 +8,7 @@
                 <xpath expr="//field[@name='ref']" position="after">
                     <field name="do_number"/>
 			 <field name="lpo_number"/>
+			 <field name="lpo_date"/>
                 </xpath>
             </field>
 	    </record>
