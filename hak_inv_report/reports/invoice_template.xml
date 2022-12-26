@@ -4,7 +4,7 @@
     <template id="tax_invoice_header_footer">
         <t t-set="company" t-value="user.company_id"/>
         <div class="header">
-            <div class="row" style="font-family: 'Trebuchet MS', sans-serif;border:2px solid black;padding:5px;">
+            <div class="row" style="font-family: 'Trebuchet MS', sans-serif;border:2px solid black;padding:7px;">
                 <div class="col-5 mb4" style="font-size:14px">
                     <strong style="font-size:14px" t-field="company.partner_id.name"/>
                     <br/>
@@ -28,7 +28,7 @@
                     <div style="text-align: right;">قم المستفيد : ٣٠٣٧٦٦٠١</div>
                     <div style="text-align: right;">OM١١٠٠٠١٩٧٢٢ o: مدخل ضريبة القيمة المضافة</div>
                 </div>
-                <br></br>
+             
             </div>
         </div>
         <div t-attf-class="o_company_#{company.id}_layout article o_report_layout mb4" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
