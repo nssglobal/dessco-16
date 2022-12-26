@@ -82,8 +82,7 @@
                                     <td colspan="3" rowspan="4" width="50%" ><span style="font-weight:bold;">Buyer Details</span>
                                         <address class="mb-0" t-field="o.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
                                         <div t-if="o.partner_id.vat">
-                                            <t t-if="o.company_id.account_fiscal_country_id.vat_label" t-esc="o.company_id.account_fiscal_country_id.vat_label" id="inv_tax_id_label"/>
-                                            <t t-else="">Tax ID</t>: <span t-field="o.partner_id.vat"/>
+                                           VAT IN: <span t-field="o.partner_id.vat"/>
                                         </div>
                                     </td>
                                     <td style="font-weight:bold;">INV No</td>
@@ -93,13 +92,13 @@
                                 </tr>
                                 <tr>
                                     <td style="font-weight:bold;">DO No</td>
-                                    <td colspan="2"></td>
+                                    <td colspan="2"><span t-field="o.do_number"/></td>
                                     <td class="text-center" style="font-weight:bold;">Date</td>
                                     <td style=""></td>
                                 </tr>
                                 <tr>
                                     <td style="font-weight:bold;">LPO No</td>
-                                    <td colspan="2"></td>
+                                    <td colspan="2"><span t-field="o.lpo_number"/></td>
                                     <td style="font-weight:bold;" class="text-center">Date</td>
                                     <td style=""></td>
                                 </tr>
