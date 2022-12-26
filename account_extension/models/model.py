@@ -11,6 +11,7 @@ class AccountMove(models.Model):
     do_number=fields.Many2one('stock.picking',string="DO Number")
     do_date=fields.Date(related='do_number.scheduled_date)
     lpo_number=fields.Char(string="LPO Number")
+    lpo_date=fields.Date('LPO Date')
 
 
 
