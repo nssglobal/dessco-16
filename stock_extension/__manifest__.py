@@ -4,6 +4,7 @@
     "category": "Inventory",
     "summary": "Stock Extension",
     "author": "Rinoy",
+    "license": "AGPL-3",
     "depends": ["base","stock"],
     "data": [
             "views/stock.xml", 
