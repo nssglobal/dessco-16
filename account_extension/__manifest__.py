@@ -2,6 +2,7 @@
     "name": "Account Extension",
     "version": "16.0",
     "category": "Account",
+    "license": "AGPL-3",
     "summary": "Account Extension",
     "author": "HAK Technologies",
     "depends": ["base","account"],
