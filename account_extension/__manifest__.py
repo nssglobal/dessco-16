@@ -1,14 +1,13 @@
 {
     "name": "Account Extension",
-    "version": "14.0",
+    "version": "16.0",
     "category": "Account",
     "summary": "Account Extension",
-    "author": "Rinoy",
+    "author": "HAK Technologies",
     "depends": ["base","account"],
+    "images": ["static/description/icon.png"],
     "data": [
-            "reports/invoice_report.xml",
             "reports/invoice_template.xml",
-
             "views/account.xml",
     ],
     "installable": True,
