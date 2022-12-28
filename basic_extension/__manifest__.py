@@ -4,6 +4,7 @@
     "category": "Addon",
     "summary": "Custom Report Header",
     "author": "Rinoy",
+    "license": "AGPL-3",
     "depends": ["base"],
     "data": [
             "views/template.xml", 
