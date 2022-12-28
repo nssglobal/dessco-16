@@ -4,6 +4,7 @@
     "category": "Sale",
     "summary": "Sale Extension",
     "author": "Rinoy",
+    "license": "AGPL-3",
     "depends": ["base","sale"],
     "data": [
             "views/sale.xml", 
