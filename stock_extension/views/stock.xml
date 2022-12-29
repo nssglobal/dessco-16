@@ -6,10 +6,8 @@
 	        <field name="model">stock.picking</field>
 	        <field name="inherit_id" ref="stock.view_picking_form"/>
 	        <field name="arch" type="xml">
-            <xpath expr="//button[@name='action_toggle_is_locked']" position="after">
-                <button name="do_print_delivery_order" class="oe_highlight" string="Print Delivery Order" groups="stock.group_stock_user" type="object" attrs="{'invisible': ['|',('picking_type_code', '!=', 'outgoing'),('state','!=','done')]}"/>
-            </xpath>
                 <xpath expr="//field[@name='move_type']" position="after">
+                    <field name="so_id"/>
                     <field name="delivery_person" attrs="{'invisible': [('picking_type_code', '!=', 'outgoing')]}"/>
                     <field name="delivery_person_mobile" attrs="{'invisible': [('picking_type_code', '!=', 'outgoing')], 'required':[('delivery_person','!=',False)]}"/>
                 </xpath> 

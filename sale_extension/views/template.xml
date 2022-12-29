@@ -1,8 +1,4 @@
 <?xml version="1.0"?>
 <odoo>
-    <template id="report_saleorder_document_inherit_sale_extension" inherit_id="sale.report_saleorder_document">
-        <xpath expr="//div[hasclass('page')]" position="before">
-            <p t-if="doc.po_ref"><strong><t t-esc="'PO Ref'"/></strong>: <span t-field="doc.po_ref"/></p>
-        </xpath>
-    </template>
+
 </odoo>

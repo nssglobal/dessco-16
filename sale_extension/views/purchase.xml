@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-        <record model='ir.ui.view' id='view_order_form_inherit'>
-	        <field name="name">view_order_form_inherit</field>
-	        <field name="model">sale.order</field>
-	        <field name="inherit_id" ref="sale.view_order_form"/>
+        <record model='ir.ui.view' id='puo_view_order_form_inherit'>
+	        <field name="name">po_view_inherit</field>
+	        <field name="model">purchase.order</field>
+	        <field name="inherit_id" ref="purchase.purchase_order_form"/>
 	        <field name="arch" type="xml">
-                <xpath expr="//field[@name='client_order_ref']" position="after">
-                    <field name="client_order_ref"/>
+                <xpath expr="//field[@name='currency_id']" position="after">
+                    <field name="transporter"/>
                 </xpath>
-                    <xpath expr="//group[@name='note_group']" position="inside">
+                    <xpath expr="//field[@name='notes']" position="after">
                         <group colspan="4">
                                 <field colspan="2" name="scope_of_work" nolabel="1" placeholder="Scope of Work..."/>
                                 <field colspan="2" name="inclusion" nolabel="1" placeholder="Inclusion..."/>

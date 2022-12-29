@@ -7,11 +7,11 @@ from odoo import api, fields, models, _
 class AccountMove(models.Model):
     _inherit = "account.move"
 
-    pr_ref = fields.Char(string="PR ref")
     do_number=fields.Char(string="DO Number",compute="compute_delivery_order")
     lpo_number=fields.Char(string="LPO Number")
     do_date=fields.Datetime(string="LPO Number")
     lpo_date=fields.Date(string="LPO Number")
+    scope_of_work = fields.Text(string="Scope of Work")
 
     def compute_delivery_order(self):
         for i in self:

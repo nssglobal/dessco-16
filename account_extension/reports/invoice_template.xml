@@ -5,88 +5,181 @@
         <xpath expr="//div[hasclass('row')]" position="replace">
 
         </xpath>
+
+
+
         <xpath expr="//div[hasclass('page')]" position="replace">
-            <div class="page" >
-                <table class="table table-lg table-bordered" style="border:2px solid black;font-size:16px;">
+            <div class="row" style="margin-bottom:50px">
+                <div class="col-8">
+                    <strong>Customer Details:</strong>
+                    <div t-field="o.partner_id"
+                         t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;,&quot;name&quot;,  &quot;phone&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"/>
+                    <p t-if="o.partner_id.vat">VAT IN:<span t-field="o.partner_id.vat"/></p>
+                    <p t-if="o.partner_id.company_registry">C.R.<span t-field="o.partner_id.company_registry"/></p>
+                    <strong><span t-if="o.partner_id.vat">Point of Contact:</span></strong><br></br>
+                    <span t-if="o.partner_id.vat">Name<span t-field="o.partner_shipping_id.name"/></span><br></br>
+                    <span t-if="o.partner_id.vat">Number<span t-field="o.partner_shipping_id.mobile"/></span><br></br>
+                    <span t-if="o.partner_id.vat">Email<span t-field="o.partner_shipping_id.email"/></span>
+                </div>
+                <div class="col-4">
+                    <h5>
+                        <span t-if="o.state not in ['draft','sent']">Invoice #</span>
+                        <span t-field="o.name"/>
+                    </h5>
+                    <div t-if="o.invoice_date" class="mw-100 mb-2">
+                        <strong>Invoice Date:</strong>
+                        <span class="m-0" t-field="o.invoice_date"/>
+                    </div>
+                    <div t-if="o.ref" class="mw-100 mb-2">
+                        <strong>Purchase Order #</strong>
+                        <span class="m-0" t-field="o.ref"/>
+                    </div>
 
-                    <tr style="padding:0px;">
-                        <td colspan="3" rowspan="4" width="50%" ><span style="font-weight:bold;">Buyer Details</span>
-                            <address class="mb-0" t-field="o.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
-                            <div t-if="o.partner_id.vat">
-                                VAT IN: <span t-field="o.partner_id.vat"/>
-                            </div>
-                        </td>
-                        <td class="text-nowrap" style="font-weight:bold;">INV No</td>
-                        <td colspan="2"><span t-field="o.name"/></td>
-                        <td style="font-weight:bold;" class="text-center">Date</td>
-                        <td style=""><span t-field="o.invoice_date"/></td>
-                    </tr>
-                    <tr>
-                        <td class="text-nowrap" style="font-weight:bold;">DO No</td>
-                        <td colspan="2"><span t-field="o.do_number"/></td>
-                        <td class="text-center" style="font-weight:bold;">Date</td>
-                        <td style=""><span t-field="o.do_date"/></td>
-                    </tr>
-                    <tr>
-                        <td class="text-nowrap" style="font-weight:bold;">LPO No</td>
-                        <td colspan="2"><span t-field="o.lpo_number"/></td>
-                        <td style="font-weight:bold;" class="text-center">Date</td>
-                        <td style=""><span t-field="o.lpo_date"/></td>
-                    </tr>
-                    <tr>
-                        <td colspan="5" style="font-weight:bold;">SALESPERSON CODE and TEL NO: <span t-field="o.invoice_user_id.name"/></td>
-                    </tr>
-                    <tr style="font-weight:bold;">
-                        <td class="text-center" width="5%">NO</td>
-                        <td colspan="2">DESCRIPTION</td>
-                        <td class="text-center">QTY</td>
-                        <td class="text-center">RATE</td>
-                        <td class="text-center">UNIT</td>
-                        <td class="text-center">VAT</td>
-                        <td class="text-center" >AMOUNT</td>
-                    </tr>
+                    <div t-if="o.invoice_origin" class="mw-100 mb-2">
+                        <strong>Quotation #</strong>
+                        <span class="m-0" t-field="o.invoice_origin"/>
+                    </div>
+                    <div t-if="o.do_number" class="mw-100 mb-2">
+                        <strong>Delivery Order #</strong>
+                        <span class="m-0" t-field="o.do_number"/>
+                    </div>
+                    <div t-if="o.invoice_user_id" class="mw-100 mb-2">
+                        <strong>Salesperson:</strong>
+                        <p class="m-0" t-field="o.invoice_user_id"/>
+                        <p class="m-0" t-field="o.invoice_user_id.partner_id.mobile"/>
+                    </div>
+                </div>
 
-                    <t t-set="sr" t-value="0"/>
-                    <tr t-foreach="o.invoice_line_ids" t-as="line">
-                        <t t-set="sr" t-value="sr+1"/>
-                        <td class="text-center"><span t-esc="sr"/></td>
-                        <td colspan="2"><span t-esc="line.name" /></td>
-                        <td class="text-center"><span t-esc="line.quantity" t-options="{'widget': 'float', 'precision': 1}"/></td>
-                        <td class="text-center"><span t-esc="line.price_unit" t-options="{'widget': 'float', 'precision': 3}"/></td>
-                        <td class="text-center"><span t-esc="line.product_uom_id.name"/></td>
-                        <td class="text-center" >
-                            <span t-esc="', '.join(map(lambda x: (x.description or x.name), line.tax_ids))"/>
-                        </td>
-                        <td class="text-center"><span t-esc="line.price_subtotal" t-options="{'widget': 'float', 'precision': 3}"/></td>
-                    </tr>
-                    <tr>
-                        <td rowspan="4" colspan="6">
-                            <span style="font-weight:bold;">Amount in Words:</span> <span t-esc="o.get_amount_in_word()"/><br/>
-                            <strong><p style="font-weight:bold;" t-esc="o.invoice_payment_term_id.note"/></strong>
-                           <b> <p style="font-weight:bold;">Notes:</p><span t-esc="o.narration"/><br/></b>
-                        </td>
-                    </tr>
-                    <tr style="border:top:2px solid white;">
-                        <td class="text-nowrap" style="font-weight:bold;border:top:2px solid white;">Total Amount</td>
-                        <td class="text-center"><span t-esc="o.amount_untaxed" t-options="{'widget': 'float', 'precision': 3}"/></td>
-                    </tr>
-                    <tr>
-                        <td class="text-nowrap" style="font-weight:bold;">VAT Amount</td>
-                        <td class="text-center"> <span t-esc="o.amount_tax" t-options="{'widget': 'float', 'precision': 3}"/></td>
-                    </tr>
-                    <tr>
-                        <td class="text-nowrap" style="font-weight:bold;">NET Amount</td>
-                        <td class="text-center"><span t-esc="o.amount_total" t-options="{'widget': 'float', 'precision': 3}"/></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2" style="font-weight:bold;">
-                            CUSTOMER'S SEAL AND SIGN<br/><br/><br/><br/>&#160;&#160;
-                        </td>
-                        <td colspan="6" style="font-weight:bold;">
-                            DHOFAR ENVIRONMENTAL SAFETY and SERVICES CO LLC<br/><br/><br/><br/>&#160;&#160;
-                        </td>
-                    </tr>
+            </div>
+            <strong t-if="o.scope_of_work">Scope of Work:<span t-field="o.scope_of_work"/></strong>
+
+
+            <div class="page">
+                <table class="table table-sm o_main_table table-borderless">
+                    <thead>
+                        <tr>
+                            <th name="th_serial"  width="10%" class="text-left">Sr.</th>
+                            <th name="th_description"  width="50%" class="text-left">Description</th>
+                            <th name="th_quantity" class="text-right">Quantity</th>
+                            <th name="th_priceunit" class="text-right">Unit Price</th>
+                            <!--                                 <th name="th_discount" t-if="display_discount" class="text-right" -->
+                            <!--                                     groups="product.group_discount_per_so_line"> -->
+                            <!--                                     <span>Disc.%</span> -->
+                            <!--                                 </th> -->
+                            <!--                             <th name="th_taxes" class="text-right">VAT</th>-->
+                            <th name="th_subtotal" class="text-right">
+                                <span >Amount</span>
+                                <!--                                <span groups="account.group_show_line_subtotals_tax_included">Total Price</span>-->
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="invoice_tbody">
+                        <t t-set="current_subtotal" t-value="0"/>
+                        <t t-set="sr" t-value="0"/>
+                        <t t-foreach="o.invoice_line_ids" t-as="line">
+                            <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                            <t t-set="current_subtotal" t-value="current_subtotal + line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+                            <tr>
+                                <t t-set="sr" t-value="sr+1"/>
+                                <td class="text-center"><span t-esc="sr"/></td>
+                                <t class="text-center">
+                                    <td name="td_name" class="text-left">
+                                        <span t-field="line.name"/>
+                                    </td>
+                                    <td name="td_quantity" class="text-center">
+                                        <span t-field="line.quantity"/>
+                                    </td>
+                                    <td name="td_priceunit" class="text-center">
+                                        <span t-field="line.price_unit"/>
+                                    </td>
+                                    <td name="td_subtotal" class="text-center">
+                                        <span t-field="line.price_subtotal" />
+
+                                    </td>
+                                </t>
+                            </tr>
+                        </t>
+                    </tbody>
                 </table>
+                <div align="right" name="so_total_summary">
+                    <div id="total" class="row" name="total">
+                        <div t-attf-class="#{'col-4' if report_type != 'html' else 'col-sm-7 col-md-5'} ml-auto" style="margin-left:560px;">
+                            <table class="table table-sm" width="100%">
+                                <tr class="border-black o_subtotal" style="">
+                                    <td name="td_amount_untaxed_label">
+                                        <strong>Subtotal</strong>
+                                    </td>
+                                    <td name="td_amount_untaxed" class="text-right">
+                                        <span t-field="o.amount_untaxed"/>
+                                    </td>
+                                </tr>
+                                <tr style="">
+                                    <t>
+                                        <td name="td_amount_tax">
+                                            Vat
+                                            <span t-esc="round(o.invoice_line_ids.tax_ids.amount)"/>
+                                            %
+                                            <br/>
+                                            on
+                                            <span t-field="o.amount_untaxed"/>
+                                        </td>
+                                        <td name="td_amount_by_group_tax">
+                                            <span t-field="o.amount_tax"/>
+                                        </td>
+                                    </t>
+                                </tr>
+                                <tr class="border-black o_total">
+                                    <td name="td_amount_total_label">
+                                        <strong>Total</strong>
+                                    </td>
+                                    <td name="td_amount_total" class="text-right">
+                                        <span t-field="o.amount_total"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+                <div align="left" style="page-break-inside: avoid;">
+                    <strong t-if="o.narration" >GENERAL TERMS &amp; CONDITIONS</strong><p t-field="o.narration"/><br></br><br></br>
+
+                    <strong>Account Name:  <span t-field="o.partner_bank_id.partner_id.name"/></strong><br></br>
+                    <strong>Account Number:<span t-field="o.partner_bank_id.acc_number"/></strong><br></br>
+                    <strong>Bank Name:<span t-field="o.partner_bank_id.bank_id.name"/></strong><br></br>
+                    <strong>SwiftCode/IBAN<span t-field="o.partner_bank_id.bank_id.bic"/></strong><br></br>
+
+
+                    <p id="fiscal_position_remark" t-if="o.invoice_incoterm_id">
+                        <strong>Incoterms</strong>
+                        <span t-field="o.invoice_incoterm_id.name"/>
+                    </p><br></br><br></br><br></br>
+
+                    <strong>Receivers Details</strong><br></br>
+                    <span t-if="o.partner_id.vat">Name</span><br></br>
+                    <span t-if="o.partner_id.vat">Number</span><br></br>
+                    <span t-if="o.partner_id.vat">Email</span><br></br>
+                    <span t-if="o.partner_id.vat">Date</span><br></br>
+                    <span t-if="o.partner_id.vat">Signature and Stamp</span><br></br><br></br><br></br>
+
+                    <strong>Submitted By</strong><br></br>
+                    <span t-if="o.partner_id.vat">Name</span><br></br>
+                    <span t-if="o.partner_id.vat">Number</span><br></br>
+                    <span t-if="o.partner_id.vat">Email</span><br></br>
+                    <span t-if="o.partner_id.vat">Date</span><br></br>
+                    <span t-if="o.partner_id.vat">Signature and Stamp</span>
+
+                </div>
             </div>
         </xpath>
 

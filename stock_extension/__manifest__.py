@@ -1,11 +1,10 @@
 {
     "name": "Stock Extension",
-    "version": "14.0",
+    "version": "16.0",
     "category": "Inventory",
     "summary": "Stock Extension",
-    "author": "Rinoy",
-    "license": "AGPL-3",
-    "depends": ["base","stock"],
+    "author": "HAK Technologies",
+    "depends": ["base","stock","sale_extension","basic_extension"],
     "data": [
             "views/stock.xml", 
             'report/delivery_slip.xml',

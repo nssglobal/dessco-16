@@ -1,32 +1,22 @@
 # -*- coding: utf-8 -*-
 
-from odoo.exceptions import UserError, ValidationError
 from odoo import api, fields, models, _
-# from odoo.tools.translate import TranslationImporter
-
 
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
-    po_ref = fields.Char(string="PO ref")
+    scope_of_work = fields.Text(string="Scope of Work")
+    inclusion = fields.Text(string="Inclusion")
+    exclusion = fields.Text(string="Exclusion")
 
-    
-    
-class ProductTemplateInh(models.Model):
-    _inherit = 'sale.order.line'
 
-    @api.onchange("product_id")
-    def _onchange_product(self):
-        for i in self:
-            i.tax_id=i.product_id.taxes_id
-            
-class PurchaseOrderLine(models.Model):
-    _inherit = 'purchase.order.line'
+class PurchaseOrder(models.Model):
+    _inherit = "purchase.order"
 
-    @api.onchange("product_id")
-    def _onchange_product(self):
-        for i in self:
-            i.taxes_id=i.product_id.taxes_id
+    scope_of_work = fields.Text(string="Scope of Work")
+    inclusion = fields.Text(string="Inclusion")
+    exclusion = fields.Text(string="Exclusion")
+    transporter = fields.Many2one("res.partner",string="Transporter")
 
 
 
