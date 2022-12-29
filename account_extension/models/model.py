@@ -18,5 +18,6 @@ class AccountMove(models.Model):
             do_obj=self.env['stock.picking'].search([("origin",'=',i.invoice_origin),("state",'=','done')],limit=1)
             i.do_number= do_obj.name
             i.do_date= do_obj.scheduled_date
+            i.scope_of_work=do_obj.so_id.scope_of_work
 
 
