@@ -3,7 +3,9 @@
 
     <template id="invoice_template" inherit_id="account.report_invoice_document">
         <xpath expr="//div[hasclass('row')]" position="replace">
-
+                  <div align="center">
+           <h4> TAX Invoice</h4>
+                </div>
         </xpath>
 
 
@@ -42,6 +44,10 @@
                     <div t-if="o.do_number" class="mw-100 mb-2">
                         <strong>Delivery Order #</strong>
                         <span class="m-0" t-field="o.do_number"/>
+                    </div>
+                       <div t-if="o.lpo_number" class="mw-100 mb-2">
+                        <strong>LPO #</strong>
+                        <span class="m-0" t-field="o.lpo_number"/>
                     </div>
                     <div t-if="o.invoice_user_id" class="mw-100 mb-2">
                         <strong>Salesperson:</strong>
