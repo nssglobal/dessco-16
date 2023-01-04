@@ -129,9 +129,7 @@
                                             Vat
                                             <span t-esc="round(o.invoice_line_ids.tax_ids.amount)"/>
                                             %
-                                            <br/>
-                                            on
-                                            <span t-field="o.amount_untaxed"/>
+                                    
                                         </td>
                                         <td name="td_amount_by_group_tax">
                                             <span t-field="o.amount_tax"/>
