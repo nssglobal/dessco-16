@@ -4,7 +4,7 @@
     <template id="tax_invoice_header_footer">
         <t t-set="company" t-value="user.company_id"/>
         <div class="header">
-            <div class="row" style="font-family: 'Trebuchet MS', sans-serif;border:2px solid black;padding-top:2px;border-bottom:2px solid white;padding-left:2px;">
+            <div class="row" style="font-family: 'Trebuchet MS', sans-serif;border:2px solid black;padding-top:2px;padding-left:2px;">
                 <div class="col-5 mb4" style="font-size:14px">
                     <strong style="font-size:14px" t-field="company.partner_id.name"/>
                     <br/>
