@@ -1,22 +1,24 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "hak_inv_report",
+    'name': "TAX invoice Report",
 
     'summary': """
-        Invoice Report""",
+       TAX invoice Report""",
 
     'description': """
-        Long description of module's purpose
+       TAX invoice Report
     """,
 
-    'author': "My Company",
-    'website': "https://www.yourcompany.com",
+      "author": "HAK Technologies",
+    'website': "https://www.haktechnologies.com",
+    "images": ["static/description/icon.png"],
+    "license": "AGPL-3",
 
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/16.0/odoo/addons/base/data/ir_module_category_data.xml
     # for the full list
-    'category': 'Uncategorized',
-    'version': '0.1',
+    'category': 'account',
+    'version': '16.0',
 
     # any module necessary for this one to work correctly
     'depends': ['base', 'account'],
