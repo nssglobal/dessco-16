@@ -93,7 +93,7 @@
                                 <t t-set="sr" t-value="sr+1"/>
                                 <td class="text-center"><span t-esc="sr"/></td>
                                 <t class="text-center">
-                                    <td name="td_name" class="text-left">
+                                    <td name="td_name" class="text-center">
                                         <span t-field="line.name"/>
                                     </td>
                                     <td name="td_quantity" class="text-center">
