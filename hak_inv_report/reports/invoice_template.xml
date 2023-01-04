@@ -73,7 +73,7 @@
                     <t t-set="o" t-value="o.with_context(lang=lang)" />
                     <div class="mt-5" >
                         <div class="page" >
-                            <table class="table table-sm table-bordered" style="border:2px solid black;font-size:11px;">
+                            <table class="table table-lg table-bordered" style="border:2px solid black;font-size:11px;">
 
                                 <tr style="padding:0px;">
                                     <td colspan="3" rowspan="4" width="50%" ><span style="font-weight:bold;">Buyer Details</span>
