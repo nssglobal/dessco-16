@@ -123,7 +123,7 @@
                                     <td class="text-center" >
                                         <span t-esc="', '.join(map(lambda x: (x.description or x.name), line.tax_ids))"/>
                                     </td>
-                                    <td class="text-center"><span t-esc="line.price_subtotal" t-options="{'widget': 'float', 'precision': 3}"/></td>
+                                    <td class="text-center"><span t-esc="line.price_subtotal" /></td>
                                 </tr>
                                 <tr>
                                     <td rowspan="4" colspan="6">
@@ -134,22 +134,22 @@
                                 </tr>
                                 <tr style="border:top:2px solid white;">
                                     <td class="text-center" style="font-weight:bold;border:top:2px solid white;">Total Amount</td>
-                                    <td><span t-esc="o.amount_untaxed" t-options="{'widget': 'float', 'precision': 3}"/></td>
+                                    <td class="text-center"><span t-esc="o.amount_untaxed" t-options="{'widget': 'float', 'precision': 3}"/></td>
                                 </tr>
                                 <tr>
                                     <td class="text-center" style="font-weight:bold;">VAT Amount</td>
-                                    <td><span t-esc="o.amount_tax" t-options="{'widget': 'float', 'precision': 3}"/></td>
+                                    <td class="text-center"><span t-esc="o.amount_tax" t-options="{'widget': 'float', 'precision': 3}"/></td>
                                 </tr>
                                 <tr>
                                     <td class="text-center" style="font-weight:bold;">NET Amount</td>
-                                    <td><span t-esc="o.amount_total" t-options="{'widget': 'float', 'precision': 3}"/></td>
+                                    <td ><span t-esc="o.amount_total" t-options="{'widget': 'float', 'precision': 3}"/></td>
                                 </tr>
                                 <tr>
                                     <td colspan="2" style="font-weight:bold;">
                                         CUSTOMER'S SEAL AND SIGN<br/><br/><br/><br/>&#160;&#160;
                                     </td>
                                     <td colspan="6" style="font-weight:bold;">
-                                        DHOFAR ENVIRONMENTAL SAFETY and SERVICES CO LLC<br/><br/><br/><br/>&#160;&#160;
+                                        DHOFAR ENVIRONMENTAL SAFETY 'amp&' SERVICES CO LLC<br/><br/><br/><br/>&#160;&#160;
                                     </td>
                                 </tr>
 
