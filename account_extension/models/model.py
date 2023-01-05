@@ -9,10 +9,10 @@ class AccountMove(models.Model):
 
     do_number=fields.Char(string="DO Number",compute="compute_delivery_order")
     
-    do_date=fields.Datetime(string="DO Date")
+    do_date=fields.Datetime(string="DO Date",compute="compute_delivery_order")
     lpo_number=fields.Char(string="LPO Number")
     lpo_date=fields.Date(string="LPO Date")
-    scope_of_work = fields.Text(string="Scope of Work")
+    scope_of_work = fields.Text(string="Scope of Work",compute="compute_delivery_order")
 
     def compute_delivery_order(self):
         for i in self:
