@@ -48,7 +48,7 @@
                             <strong>Delivery Order #</strong>
                             <span class="m-0" t-field="doc.name"/>
                         </div>
-                        <div t-if="doc.state" name="div_sched_date" class="mw-100 mb-2">
+                        <div t-if="doc.date_done" name="div_sched_date" class="mw-100 mb-2">
                             <strong>DO Date:</strong>
                             <t t-if="doc.state == 'done'">
                                 <span class="m-0" t-field="doc.date_done"/>
@@ -120,13 +120,13 @@
                     <p t-if="doc.so_id.payment_term_id.note">
                         <span t-field="doc.so_id.payment_term_id.note"/>
                     </p>
-                    <strong t-if="o.note">Comments:<br></br><p t-field="doc.note"/></strong>
-                    <div t-if="o.note" style="margin-top:10px">
+                    <strong t-if="doc.note">Comments:<br></br><p t-field="doc.note"/></strong>
+                    <div t-if="doc.note" style="margin-top:10px">
                         <div class="col-12">
                             <div style="border-bottom: 2px solid black;"></div>
                         </div>
                     </div>
-                    <div t-if="o.note" style="margin-top:30px" class="row">
+                    <div t-if="doc.note" style="margin-top:30px" class="row">
                         <div class="col-12">
                             <div style="border-bottom: 2px solid black;"></div>
                         </div>
