@@ -45,37 +45,38 @@
                         <span t-if="doc.partner_id.vat">Email</span> -->
                     </div>
                     <div class="col-4">
-                        <div  class="mw-100 mb-2">
+                      
                             <strong>Delivery Order #</strong>
-                            <span class="m-0" t-field="doc.name"/>
-                        </div>
-                        <div t-if="doc.date_done" name="div_sched_date" class="mw-100 mb-2">
+                        <span class="m-0" t-field="doc.name"/> <br></br>
+                        
+                       <t t-if="doc.so_id">
                             <strong>DO Date:</strong>
-                            <t t-if="doc.state == 'done'">
-                                <span class="m-0" t-field="doc.date_done"/>
-                            </t>
-                        </div>
-                        <div t-if="doc.so_id" name="div_po_ref" class="mw-100 mb-2">
+                    
+                                <span class="m-0" t-field="doc.date_done"/><br></br>
+                        </t>
+                   
+                       <t t-if="doc.so_id">
                             <strong>Purchase Order #</strong>
-                            <span class="m-0" t-field="doc.so_id.client_order_ref"/>
-                        </div>
-                        <div t-if="doc.origin" class="mw-100 mb-2">
+                            <span class="m-0" t-field="doc.so_id.client_order_ref"/><br></br>
+                        </t>
+                   
+                        <t t-if="doc.origin">
                             <strong>Quotation #</strong>
-                            <t t-if="doc.origin">
-                                <span class="m-0" t-field="doc.origin"/>
+                         
+                                <span class="m-0" t-field="doc.origin"/><br></br>
                             </t>
-                        </div>
-                        <div t-if="doc.so_id.order_line.invoice_lines" class="mw-100 mb-2">
+                
+                                  <t t-if="doc.doc.so_id">
                             <strong>Invoice #</strong>
-                            <t t-if="doc.origin">
-                                <span class="m-0" t-field="doc.so_id.order_line.invoice_lines.move_id.name"/>
+                          
+                                <span class="m-0" t-field="doc.so_id.order_line.invoice_lines.move_id.name"/><br></br>
                             </t>
-                        </div>
-                        <div t-if="doc.so_id.user_id.name" class="mw-100 mb-2">
+              
+                      
                             <strong>Salesperson:</strong>
                             <p class="m-0" t-field="doc.so_id.user_id"/>
                             <p class="m-0" t-field="doc.so_id.user_id.partner_id.mobile"/>
-                        </div>
+              
                     </div>
                 </div>
                 
