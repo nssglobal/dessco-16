@@ -38,10 +38,10 @@
                         <p t-if="doc.partner_id.vat">VAT IN:
                             <span t-field="doc.partner_id.vat"/>
                         </p>
-                        <strong><span t-if="doc.partner_id.vat">Point of Contact:</span></strong><br></br>
+<!--                         <strong><span t-if="doc.partner_id.vat">Point of Contact:</span></strong><br></br>
                         <span t-if="doc.partner_id.vat">Name</span><br></br>
                         <span t-if="doc.partner_id.vat">Number</span><br></br>
-                        <span t-if="doc.partner_id.vat">Email</span>
+                        <span t-if="doc.partner_id.vat">Email</span> -->
                     </div>
                     <div class="col-4">
                         <div  class="mw-100 mb-2">
@@ -120,13 +120,13 @@
                     <p t-if="doc.so_id.payment_term_id.note">
                         <span t-field="doc.so_id.payment_term_id.note"/>
                     </p>
-                    <strong>Comments:<br></br><p t-field="doc.note"/></strong>
-                    <div style="margin-top:10px">
+                    <strong t-if="o.note">Comments:<br></br><p t-field="doc.note"/></strong>
+                    <div t-if="o.note" style="margin-top:10px">
                         <div class="col-12">
                             <div style="border-bottom: 2px solid black;"></div>
                         </div>
                     </div>
-                    <div style="margin-top:30px" class="row">
+                    <div t-if="o.note" style="margin-top:30px" class="row">
                         <div class="col-12">
                             <div style="border-bottom: 2px solid black;"></div>
                         </div>
@@ -135,19 +135,19 @@
                     <div class="row" style="margin-top:10px">
                         <div class="col-8">
                             <strong>Receivers Details</strong><br></br>
-                            <span t-if="doc.partner_id.vat">Name</span><br></br>
-                            <span t-if="doc.partner_id.vat">Number</span><br></br>
-                            <span t-if="doc.partner_id.vat">Email</span><br></br>
-                            <span t-if="doc.partner_id.vat">Date</span><br></br>
-                            <span t-if="doc.partner_id.vat">Signature and Stamp</span>
+                           <span>Name</span><br></br>
+                            <span>Number</span><br></br>
+                            <span>Email</span><br></br>
+                            <span>Date</span><br></br>
+                            <span>Signature and Stamp</span>
                         </div>
                         <div class="col-4">
                             <strong>Submitted By</strong><br></br>
-                            <span t-if="doc.partner_id.vat">Name</span><br></br>
-                            <span t-if="doc.partner_id.vat">Number</span><br></br>
-                            <span t-if="doc.partner_id.vat">Email</span><br></br>
-                            <span t-if="doc.partner_id.vat">Date</span><br></br>
-                            <span t-if="doc.partner_id.vat">Signature and Stamp</span>
+                            <span >Name</span><br></br>
+                            <span >Number</span><br></br>
+                            <span >Email</span><br></br>
+                            <span>Date</span><br></br>
+                            <span>Signature and Stamp</span>
                         </div>
                     </div>
                 </div>
