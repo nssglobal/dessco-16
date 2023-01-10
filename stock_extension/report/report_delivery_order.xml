@@ -17,10 +17,10 @@
                     <p t-if="o.partner_id.vat">VAT IN:
                         <span t-field="o.partner_id.vat"/>
                     </p>
-<!--                     <strong><span t-if="o.partner_id.vat">Point of Contact:</span></strong><br></br>
+                    <strong><span t-if="o.partner_id.vat">Point of Contact:</span></strong><br></br>
                     <span t-if="o.partner_id.vat">Name</span><br></br>
                     <span t-if="o.partner_id.vat">Number</span><br></br>
-                    <span t-if="o.partner_id.vat">Email</span> -->
+                    <span t-if="o.partner_id.vat">Email</span>
                 </div>
                 <div class="col-4">
                     <div  class="mw-100 mb-2">
@@ -186,13 +186,13 @@
                 <p t-if="o.so_id.payment_term_id.note">
                     <span t-field="o.so_id.payment_term_id.note"/>
                 </p>
-                <strong t-if="o.note">Comments:<br></br><p t-field="o.note"/></strong>
-                <div style="margin-top:10px" t-if="o.note">
+                <strong>Comments:<br></br><p t-field="o.note"/></strong>
+                <div style="margin-top:10px" >
                     <div class="col-12">
                         <div style="border-bottom: 2px solid black;"></div>
                     </div>
                 </div>
-                <div style="margin-top:30px" class="row" t-if="o.note">
+                <div style="margin-top:30px" class="row" >
                     <div class="col-12">
                         <div style="border-bottom: 2px solid black;"></div>
                     </div>
