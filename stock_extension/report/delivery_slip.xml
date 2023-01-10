@@ -1,5 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+
+
+        <record id="action_report_deliveryslip" model="ir.actions.report">
+            <field name="name">Delivery Order HALF</field>
+            <field name="model">stock.picking</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">stock_extension.report_delivery_order</field>
+            <field name="report_file">stock_extension.report_delivery_order</field>
+            <field name="print_report_name">'Delivery Order - %s' % (object.name)</field>
+            <field name="binding_model_id" ref="model_stock_picking"/>
+            <field name="paperformat_id" ref="hak_inv_report.paperformat_report_inv"/>
+
+        </record>
+
+
+        <template id="report_delivery_order">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="stock_extension.report_delivery_order_document" t-lang="doc.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+
+
+
+
+        <template id="report_delivery_order_document">
+            <t t-call="web.external_layout">
+                <t t-set="doc" t-value="doc.with_context(lang=doc.partner_id.lang)"/>
+                <div class="row" style="MARGIN-BOTTOM: 5%;">
+                    <div class="col-8" t-if="doc.so_id">
+                        <strong>Customer Details:</strong>
+                        <div t-field="doc.partner_id"
+                             t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;, &quot;phone&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"/>
+                        <p t-if="doc.partner_id.vat">VAT IN:
+                            <span t-field="doc.partner_id.vat"/>
+                        </p>
+                        <strong><span t-if="doc.partner_id.vat">Point of Contact:</span></strong><br></br>
+                        <span t-if="doc.partner_id.vat">Name</span><br></br>
+                        <span t-if="doc.partner_id.vat">Number</span><br></br>
+                        <span t-if="doc.partner_id.vat">Email</span>
+                    </div>
+                    <div class="col-4">
+                        <div  class="mw-100 mb-2">
+                            <strong>Delivery Order #</strong>
+                            <span class="m-0" t-field="doc.name"/>
+                        </div>
+                        <div t-if="doc.state" name="div_sched_date" class="mw-100 mb-2">
+                            <strong>DO Date:</strong>
+                            <t t-if="doc.state == 'done'">
+                                <span class="m-0" t-field="doc.date_done"/>
+                            </t>
+                        </div>
+                        <div t-if="doc.so_id" name="div_po_ref" class="mw-100 mb-2">
+                            <strong>Purchase Order #</strong>
+                            <span class="m-0" t-field="doc.so_id.client_order_ref"/>
+                        </div>
+                        <div t-if="doc.origin" class="mw-100 mb-2">
+                            <strong>Quotation #</strong>
+                            <t t-if="doc.origin">
+                                <span class="m-0" t-field="doc.origin"/>
+                            </t>
+                        </div>
+                        <div t-if="doc.so_id.order_line.invoice_lines" class="mw-100 mb-2">
+                            <strong>Invoice #</strong>
+                            <t t-if="doc.origin">
+                                <span class="m-0" t-field="doc.so_id.order_line.invoice_lines.move_id.name"/>
+                            </t>
+                        </div>
+                        <div t-if="doc.so_id.user_id.name" class="mw-100 mb-2">
+                            <strong>Salesperson:</strong>
+                            <p class="m-0" t-field="doc.so_id.user_id"/>
+                            <p class="m-0" t-field="doc.so_id.user_id.partner_id.mobile"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="page">
+                    <table class="table table-sm o_main_table table-borderless" name="stock_move_table">
+                        <thead>
+                            <tr>
+                                <th class="text-center" name="th_sm_product">
+                                    <strong class="text-center">Sr.</strong>
+                                </th>
+
+                                <th class="text-left" name="th_sm_product">
+                                    <strong class="text-center">Description</strong>
+                                </th>
+                                <th class="text-center" name="th_sm_quantity">
+                                    <strong>Quantity</strong>
+                                </th>
+
+                                <th class="text-center" name="th_sm_unit">
+                                    <strong>Unit</strong>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="lines" t-value="doc.move_ids_without_package"/>
+                            <t t-set="sr" t-value="0"/>
+                            <tr t-foreach="lines" t-as="move">
+                                <t t-set="sr" t-value="sr+1"/>
+                                <td class="text-center"><span t-esc="sr"/></td>
+                                <td class="text-center">
+                                    <span t-field="move.product_id.name"/>
+                                </td>
+                                <td class="text-center">
+                                    <span t-field="move.product_uom_qty"/>
+                                </td>
+                                <td class="text-center">
+                                    <span t-field="move.product_uom"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="oe_structure"/>
+                    <p t-if="doc.so_id.payment_term_id.note">
+                        <span t-field="doc.so_id.payment_term_id.note"/>
+                    </p>
+                    <strong>Comments:<br></br><p t-field="doc.note"/></strong>
+                    <div style="margin-top:10px">
+                        <div class="col-12">
+                            <div style="border-bottom: 2px solid black;"></div>
+                        </div>
+                    </div>
+                    <div style="margin-top:30px" class="row">
+                        <div class="col-12">
+                            <div style="border-bottom: 2px solid black;"></div>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-top:10px">
+                        <div class="col-8">
+                            <strong>Receivers Details</strong><br></br>
+                            <span t-if="doc.partner_id.vat">Name</span><br></br>
+                            <span t-if="doc.partner_id.vat">Number</span><br></br>
+                            <span t-if="doc.partner_id.vat">Email</span><br></br>
+                            <span t-if="doc.partner_id.vat">Date</span><br></br>
+                            <span t-if="doc.partner_id.vat">Signature and Stamp</span>
+                        </div>
+                        <div class="col-4">
+                            <strong>Submitted By</strong><br></br>
+                            <span t-if="doc.partner_id.vat">Name</span><br></br>
+                            <span t-if="doc.partner_id.vat">Number</span><br></br>
+                            <span t-if="doc.partner_id.vat">Email</span><br></br>
+                            <span t-if="doc.partner_id.vat">Date</span><br></br>
+                            <span t-if="doc.partner_id.vat">Signature and Stamp</span>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
     </data>
 </odoo>
