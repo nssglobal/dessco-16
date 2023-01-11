@@ -139,7 +139,7 @@
                             <strong>Receivers Details</strong><br></br>
                            <span>Name</span><br></br>
                             <span>Number</span><br></br>
-                            <span>Email</span><br></br>
+       
                             <span>Date</span><br></br>
                             <span>Signature and Stamp</span>
                         </div>
@@ -147,7 +147,7 @@
                             <strong>Submitted By</strong><br></br>
                             <span >Name</span><br></br>
                             <span >Number</span><br></br>
-                            <span >Email</span><br></br>
+               
                             <span>Date</span><br></br>
                             <span>Signature and Stamp</span>
                         </div>
