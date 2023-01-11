@@ -57,7 +57,7 @@
                    
                        <t t-if="doc.so_id">
                             <strong>Purchase Order #</strong>
-                            <span class="m-0" t-field="doc.so_id.client_order_ref"/><br></br>
+                            <span class="m-0" t-esc="doc.so_id.client_order_ref"/><br></br>
                         </t>
                    
                         <t t-if="doc.origin">
@@ -66,16 +66,16 @@
                                 <span class="m-0" t-field="doc.origin"/><br></br>
                             </t>
                 
-                                  <t t-if="doc.doc.so_id">
+                                  <t t-if="doc.so_id">
                             <strong>Invoice #</strong>
                           
-                                <span class="m-0" t-field="doc.so_id.order_line.invoice_lines.move_id.name"/><br></br>
+                                <span class="m-0" t-esc="doc.so_id.order_line.invoice_lines.move_id.name"/><br></br>
                             </t>
               
                       
                             <strong>Salesperson:</strong>
-                            <p class="m-0" t-field="doc.so_id.user_id"/>
-                            <p class="m-0" t-field="doc.so_id.user_id.partner_id.mobile"/>
+                            <p class="m-0" t-esc="doc.so_id.user_id"/>
+                            <p class="m-0" t-esc="doc.so_id.user_id.partner_id.mobile"/>
               
                     </div>
                 </div>
