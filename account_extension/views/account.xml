@@ -6,13 +6,13 @@
 	        <field name="inherit_id" ref="account.view_move_form"/>
 	        <field name="arch" type="xml">
                 <xpath expr="//field[@name='ref']" position="after">
-			<field name="do_number"/>
-                    <field name="do_date"/>
-                    <field name="lpo_number"/>
-                    <field name="lpo_date"/>
+			<field name="do_number" attrs="{'invisible': [('move_type', '=', 'entry')}"/>
+                    <field name="do_date" attrs="{'invisible': [('move_type', '=', 'entry')}"/>
+                    <field name="lpo_number" />
+                    <field name="lpo_date" attrs="{'invisible': [('move_type', '=', 'entry')}"/>
                 </xpath>
                     <xpath expr="//field[@name='narration']" position="after">
-                   <field colspan="2" name="scope_of_work" nolabel="1" placeholder="Scope of Work..."/>
+                   <field colspan="2" name="scope_of_work" nolabel="1" placeholder="Scope of Work..." attrs="{'invisible': [('move_type', '=', 'entry')}"/>
 
                 </xpath>
             </field>
