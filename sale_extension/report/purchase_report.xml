@@ -138,8 +138,7 @@
                                 <tr class="is-subtotal text-right">
                                     <td name="td_section_subtotal" colspan="99">
                                         <strong class="mr16">Subtotal</strong>
-                                        <span t-esc="current_subtotal"
-                                              t-options='{"widget": "float", "decimal_precision":"Product Unit of Measure"}'/>
+                                        <span t-esc="current_subtotal" t-options='{"widget": "float", "decimal_precision":"Product Unit of Measure"}'/>
                                     </td>
                                 </tr>
                             </t>
