@@ -103,7 +103,7 @@
                                         <span t-field="line.price_unit"/>
                                     </td>
                                     <td name="td_subtotal" class="text-center">
-                                        <span t-field="line.price_subtotal" t-options='{"widget": "float", "decimal_precision": 3}' />
+                                        <span t-field="line.price_subtotal" t-options='{"widget": "float", "decimal_precision": "Product Unit of Measure"}' />
 
                                     </td>
                                 </t>
@@ -120,19 +120,19 @@
                                         <strong>Subtotal</strong>
                                     </td>
                                     <td name="td_amount_untaxed" class="text-right">
-                                        <span t-field="o.amount_untaxed" t-options='{"widget": "float", "decimal_precision": 3}'/>
+                                        <span t-field="o.amount_untaxed" t-options='{"widget": "float", "decimal_precision": "Product Unit of Measure"}'/>
                                     </td>
                                 </tr>
                                 <tr style="">
                                     <t>
                                         <td name="td_amount_tax">
                                             Vat
-                                            <span t-esc="round(o.invoice_line_ids.tax_ids.amount)" t-options='{"widget": "float", "decimal_precision": 3}'/>
+                                            <span t-esc="round(o.invoice_line_ids.tax_ids.amount)" t-options='{"widget": "float", "decimal_precision": "Product Unit of Measure"}'/>
                                             %
                                     
                                         </td>
                                         <td name="td_amount_by_group_tax">
-                                            <span t-field="o.amount_tax" t-options='{"widget": "float", "decimal_precision": 3}'/>
+                                            <span t-field="o.amount_tax" t-options='{"widget": "float", "decimal_precision": "Product Unit of Measure"}'/>
                                         </td>
                                     </t>
                                 </tr>
@@ -141,7 +141,7 @@
                                         <strong>Total</strong>
                                     </td>
                                     <td name="td_amount_total" class="text-right">
-                                        <span t-field="o.amount_total" t-options='{"widget": "float", "decimal_precision": 3}'/>
+                                        <span t-field="o.amount_total" t-options='{"widget": "float", "decimal_precision":"Product Unit of Measure"}'/>
                                     </td>
                                 </tr>
                             </table>
