@@ -26,7 +26,7 @@
                     <span t-if="o.partner_id.vat">Name<span t-field="o.partner_invoice_id.name"/></span><br></br>
                     <span t-if="o.partner_id.vat">Number<span t-field="o.partner_invoice_id.mobile"/></span><br></br>
                     <span t-if="o.partner_id.vat">Email<span t-field="o.partner_id.email"/></span>
-                    <span t-if="o.incotercom_id">Intercoms<span t-field="o.incotercom_id.name"/></span>
+                    <span t-if="o.incoterm_id">Intercoms<span t-field="o.incoterm_id.name"/></span>
                 </div>
                 <div class="col-4">
                     <h5>
