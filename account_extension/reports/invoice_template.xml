@@ -78,7 +78,7 @@
                             <!--                                 </th> -->
                             <!--                             <th name="th_taxes" class="text-right">VAT</th>-->
                             <th name="th_subtotal" class="text-right">
-                                <span >Amount</span>
+                                <span >Amount (OMR)</span>
                                 <!--                                <span groups="account.group_show_line_subtotals_tax_included">Total Price</span>-->
                             </th>
                         </tr>
@@ -103,7 +103,7 @@
                                         <span t-field="line.price_unit"/>
                                     </td>
                                     <td name="td_subtotal" class="text-center">
-                                        <span t-field="line.price_subtotal" />
+                                        <span t-field="line.price_subtotal" t-options='{"widget": "float", "decimal_precision": 3}' />
 
                                     </td>
                                 </t>
@@ -120,19 +120,19 @@
                                         <strong>Subtotal</strong>
                                     </td>
                                     <td name="td_amount_untaxed" class="text-right">
-                                        <span t-field="o.amount_untaxed"/>
+                                        <span t-field="o.amount_untaxed" t-options='{"widget": "float", "decimal_precision": 3}'/>
                                     </td>
                                 </tr>
                                 <tr style="">
                                     <t>
                                         <td name="td_amount_tax">
                                             Vat
-                                            <span t-esc="round(o.invoice_line_ids.tax_ids.amount)"/>
+                                            <span t-esc="round(o.invoice_line_ids.tax_ids.amount)" t-options='{"widget": "float", "decimal_precision": 3}'/>
                                             %
                                     
                                         </td>
                                         <td name="td_amount_by_group_tax">
-                                            <span t-field="o.amount_tax"/>
+                                            <span t-field="o.amount_tax" t-options='{"widget": "float", "decimal_precision": 3}'/>
                                         </td>
                                     </t>
                                 </tr>
@@ -141,7 +141,7 @@
                                         <strong>Total</strong>
                                     </td>
                                     <td name="td_amount_total" class="text-right">
-                                        <span t-field="o.amount_total"/>
+                                        <span t-field="o.amount_total" t-options='{"widget": "float", "decimal_precision": 3}'/>
                                     </td>
                                 </tr>
                             </table>
