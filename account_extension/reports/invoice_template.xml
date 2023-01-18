@@ -175,18 +175,18 @@
                     </p><br></br><br></br><br></br>
 
                     <strong>Receivers Details</strong><br></br>
-                    <span t-if="o.partner_id.vat">Name</span><br></br>
-                    <span t-if="o.partner_id.vat">Number</span><br></br>
-                    <span t-if="o.partner_id.vat">Email</span><br></br>
-                    <span t-if="o.partner_id.vat">Date</span><br></br>
-                    <span t-if="o.partner_id.vat">Signature and Stamp</span><br></br><br></br><br></br>
+                    <span>Name</span><br></br>
+                    <span>Number</span><br></br>
+                    <span>Email</span><br></br>
+                    <span>Date</span><br></br>
+                   <span>Signature and Stamp</span><br></br><br></br><br></br>
 
                     <strong>Submitted By</strong><br></br>
-                    <span t-if="o.partner_id.vat">Name</span><br></br>
-                    <span t-if="o.partner_id.vat">Number</span><br></br>
-                    <span t-if="o.partner_id.vat">Email</span><br></br>
-                    <span t-if="o.partner_id.vat">Date</span><br></br>
-                    <span t-if="o.partner_id.vat">Signature and Stamp</span>
+                    <span>Name </span> <span t-field="o.created_by"/><br></br>
+                    <span>Number </span><span t-field="o.created_by.partner_id.mobile"/><br></br>
+                    <span>Email</span><span t-field="o.created_by.partner_id.email"/><br></br>
+                    <span>Date</span><span t-field="o.invoice_date"/><br></br>
+                    <span>Signature and Stamp</span>
 
                 </div>
             </div>
