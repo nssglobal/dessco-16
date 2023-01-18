@@ -57,6 +57,7 @@
                         <strong>Salesperson: </strong>
                         <p class="m-0" t-field="o.invoice_user_id"/>
                         <p class="m-0" t-field="o.invoice_user_id.partner_id.mobile"/>
+                         <p class="m-0" t-field="o.invoice_user_id.partner_id.email"/>
                     </div>
                 </div>
 
@@ -160,7 +161,7 @@
 
 
                 <div align="left" style="page-break-inside: avoid;">
-                    <strong t-if="o.narration" >GENERAL TERMS &amp; CONDITIONS</strong><p t-field="o.narration"/><br></br><br></br>
+<!--                     <strong t-if="o.narration" >GENERAL TERMS &amp; CONDITIONS</strong><p t-field="o.narration"/><br></br><br></br> -->
 
                     <strong>Account Name:  <span t-field="o.partner_bank_id.partner_id.name"/></strong><br></br>
                     <strong>Account Number:<span t-field="o.partner_bank_id.acc_number"/></strong><br></br>
