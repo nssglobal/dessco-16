@@ -188,7 +188,7 @@
                         </div>
                     <div class="col-5">
                     <strong>Submitted By</strong><br></br>
-                    <span>Name </span> <span t-esc="o.create_uid.name"/><br></br>
+                    <span>Name </span> <span t-esc="o.create_uid.partner_id.name"/><br></br>
                     <span>Number </span><span t-esc="o.create_uid.partner_id.mobile"/><br></br>
                     <span>Email</span><span t-esc="o.create_uid.partner_id.email"/><br></br>
                     <span>Date</span><span t-esc="o.invoice_date"/><br></br>
