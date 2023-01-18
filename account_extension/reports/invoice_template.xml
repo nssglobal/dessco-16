@@ -19,9 +19,9 @@
                     <p t-if="o.partner_id.vat">VAT IN: <span t-field="o.partner_id.vat"/></p>
                     <p t-if="o.partner_id.company_registry">C.R. <span t-field="o.partner_id.company_registry"/></p>
                     <strong><span>Point of Contact: </span></strong><br/>
-                    <strong><span t-if="o.partner_shipping_id">Name: </strong><span t-field="o.partner_shipping_id.name"/></span><br/>
-                    <strong><span t-if="o.partner_shipping_id">Mobile: </strong><span t-field="o.partner_shipping_id.mobile"/></span><br/>
-                    <strong><span t-if="o.partner_shipping_id">Email: </strong><span t-field="o.partner_shipping_id.email"/></span>
+                    <strong>Name: </strong><span t-field="o.partner_shipping_id.name"/></span><br/>
+                    <strong>Mobile: </strong><span t-field="o.partner_shipping_id.mobile"/></span><br/>
+                    <strong>Email: </strong><span t-field="o.partner_shipping_id.email"/></span>
                 </div>
                 <div class="col-4">
                     <h5 t-if="o.state not in ['draft','sent']">
