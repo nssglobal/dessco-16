@@ -165,7 +165,7 @@
 <!--                     <strong t-if="o.narration" >GENERAL TERMS &amp; CONDITIONS</strong><p t-field="o.narration"/><br></br><br></br> -->
                       <p t-if="o.invoice_payment_term_id.name">
                         <strong>Payment Terms</strong>
-                        <span t-field="o.invoice_payment_term_id.name"/>
+                        <span t-field="o.invoice_payment_term_id.name"/></p>
 
                     <strong>Account Name:  <span t-field="o.partner_bank_id.partner_id.name"/></strong><br></br>
                     <strong>Account Number:<span t-field="o.partner_bank_id.acc_number"/></strong><br></br>
