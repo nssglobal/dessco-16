@@ -16,52 +16,52 @@
                     <strong>Customer Details:</strong>
                     <div t-field="o.partner_id"
                          t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;,&quot;name&quot;,  &quot;phone&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"/>
-                    <p t-if="o.partner_id.vat">VAT IN:<span t-field="o.partner_id.vat"/></p>
-                    <p t-if="o.partner_id.company_registry">C.R.<span t-field="o.partner_id.company_registry"/></p>
-                    <strong><span t-if="o.partner_id.vat">Point of Contact:</span></strong><br></br>
-                    <span t-if="o.partner_id.vat">Name<span t-field="o.partner_shipping_id.name"/></span><br></br>
-                    <span t-if="o.partner_id.vat">Number<span t-field="o.partner_shipping_id.mobile"/></span><br></br>
-                    <span t-if="o.partner_id.vat">Email<span t-field="o.partner_shipping_id.email"/></span>
+                    <p t-if="o.partner_id.vat">VAT IN: <span t-field="o.partner_id.vat"/></p>
+                    <p t-if="o.partner_id.company_registry">C.R. <span t-field="o.partner_id.company_registry"/></p>
+                    <strong><span t-if="o.partner_id.vat">Point of Contact: </span></strong><br></br>
+                    <span t-if="o.partner_id.vat">Name <span t-field="o.partner_shipping_id.name"/></span><br></br>
+                    <span t-if="o.partner_id.vat">Number <span t-field="o.partner_shipping_id.mobile"/></span><br></br>
+                    <span t-if="o.partner_id.vat">Email <span t-field="o.partner_shipping_id.email"/></span>
                 </div>
                 <div class="col-4">
-                    <h5>
-                        <span t-if="o.state not in ['draft','sent']">Invoice #</span>
+                    <h5 t-if="o.state not in ['draft','sent']">
+                        <span >Invoice #</span>
                         <span t-field="o.name"/>
                     </h5>
                     <div t-if="o.invoice_date" class="mw-100 mb-2">
-                        <strong>Invoice Date:</strong>
+                        <strong>Invoice Date: </strong>
                         <span class="m-0" t-field="o.invoice_date"/>
                     </div>
                     <div t-if="o.ref" class="mw-100 mb-2">
-                        <strong>Purchase Order #</strong>
+                        <strong>Purchase Order # </strong>
                         <span class="m-0" t-field="o.ref"/>
                     </div>
 
                     <div t-if="o.invoice_origin" class="mw-100 mb-2">
-                        <strong>Quotation #</strong>
+                        <strong>Quotation # </strong>
                         <span class="m-0" t-field="o.invoice_origin"/>
                     </div>
                     <div t-if="o.do_number" class="mw-100 mb-2">
-                        <strong>Delivery Order #</strong>
+                        <strong>Delivery Order # </strong>
                         <span class="m-0" t-field="o.do_number"/>
                     </div>
                        <div t-if="o.lpo_number" class="mw-100 mb-2">
-                        <strong>LPO #</strong>
+                        <strong>LPO # </strong>
                         <span class="m-0" t-field="o.lpo_number"/>
                     </div>
                           <div t-if="o.lpo_date" class="mw-100 mb-2">
-                        <strong>LPO Date</strong>
+                        <strong>LPO Date </strong>
                         <span class="m-0" t-field="o.lpo_date"/>
                     </div>
                     <div t-if="o.invoice_user_id" class="mw-100 mb-2">
-                        <strong>Salesperson:</strong>
+                        <strong>Salesperson: </strong>
                         <p class="m-0" t-field="o.invoice_user_id"/>
                         <p class="m-0" t-field="o.invoice_user_id.partner_id.mobile"/>
                     </div>
                 </div>
 
             </div>
-            <strong t-if="o.scope_of_work">Scope of Work:<span t-field="o.scope_of_work"/></strong>
+            <strong t-if="o.scope_of_work">Scope of Work: <span t-field="o.scope_of_work"/></strong>
 
 
             <div class="page">
