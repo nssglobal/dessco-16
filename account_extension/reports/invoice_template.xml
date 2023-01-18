@@ -167,12 +167,17 @@
                     <strong>Account Number:<span t-field="o.partner_bank_id.acc_number"/></strong><br></br>
                     <strong>Bank Name:<span t-field="o.partner_bank_id.bank_id.name"/></strong><br></br>
                     <strong>SwiftCode/IBAN<span t-field="o.partner_bank_id.bank_id.bic"/></strong><br></br>
+                   
 
-
+                                
                     <p id="fiscal_position_remark" t-if="o.invoice_incoterm_id">
                         <strong>Incoterms</strong>
                         <span t-field="o.invoice_incoterm_id.name"/>
                     </p><br></br><br></br><br></br>
+                      </div>
+                
+                <div class="row">
+                    <div class="col-5">
 
                     <strong>Receivers Details</strong><br></br>
                     <span>Name</span><br></br>
@@ -180,7 +185,8 @@
                     <span>Email</span><br></br>
                     <span>Date</span><br></br>
                    <span>Signature and Stamp</span><br></br><br></br><br></br>
-
+                        </div>
+                    <div class="col-5">
                     <strong>Submitted By</strong><br></br>
                     <span>Name </span> <span t-esc="o.create_uid"/><br></br>
                     <span>Number </span><span t-esc="o.create_uid.partner_id.mobile"/><br></br>
