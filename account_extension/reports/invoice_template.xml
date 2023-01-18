@@ -196,6 +196,7 @@
 
                 </div>
             </div>
+                   </div>
         </xpath>
 
         <xpath expr="//p[@name='payment_communication']" position="replace">
