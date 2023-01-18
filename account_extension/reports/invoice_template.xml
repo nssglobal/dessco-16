@@ -182,10 +182,10 @@
                    <span>Signature and Stamp</span><br></br><br></br><br></br>
 
                     <strong>Submitted By</strong><br></br>
-                    <span>Name </span> <span t-field="o.created_by"/><br></br>
-                    <span>Number </span><span t-field="o.created_by.partner_id.mobile"/><br></br>
-                    <span>Email</span><span t-field="o.created_by.partner_id.email"/><br></br>
-                    <span>Date</span><span t-field="o.invoice_date"/><br></br>
+                    <span>Name </span> <span t-esc="o.created_uid"/><br></br>
+                    <span>Number </span><span t-esc="o.created_uid.partner_id.mobile"/><br></br>
+                    <span>Email</span><span t-esc="o.created_uid.partner_id.email"/><br></br>
+                    <span>Date</span><span t-esc="o.invoice_date"/><br></br>
                     <span>Signature and Stamp</span>
 
                 </div>
