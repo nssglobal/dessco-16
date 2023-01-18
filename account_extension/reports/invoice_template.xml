@@ -18,10 +18,10 @@
                          t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;,&quot;name&quot;,  &quot;phone&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"/>
                     <p t-if="o.partner_id.vat">VAT IN: <span t-field="o.partner_id.vat"/></p>
                     <p t-if="o.partner_id.company_registry">C.R. <span t-field="o.partner_id.company_registry"/></p>
-                    <strong><span t-if="o.partner_id.vat">Point of Contact: </span></strong><br></br>
-                    <span t-if="o.partner_id.vat">Name <span t-field="o.partner_shipping_id.name"/></span><br></br>
-                    <span t-if="o.partner_id.vat">Number <span t-field="o.partner_shipping_id.mobile"/></span><br></br>
-                    <span t-if="o.partner_id.vat">Email <span t-field="o.partner_shipping_id.email"/></span>
+                    <strong><span>Point of Contact: </span></strong><br/>
+                    <span t-if="o.partner_shipping_id">Name <span t-field="o.partner_shipping_id.name"/></span><br/>
+                    <span t-if="o.partner_shipping_id">Mobile <span t-field="o.partner_shipping_id.mobile"/></span><br/>
+                    <span t-if="o.partner_shipping_id">Email <span t-field="o.partner_shipping_id.email"/></span>
                 </div>
                 <div class="col-4">
                     <h5 t-if="o.state not in ['draft','sent']">
@@ -55,9 +55,10 @@
                     </div>
                     <div t-if="o.invoice_user_id" class="mw-100 mb-2">
                         <strong>Salesperson: </strong>
-                        <p class="m-0" t-field="o.invoice_user_id"/>
-                        <p class="m-0" t-field="o.invoice_user_id.partner_id.mobile"/>
-                         <p class="m-0" t-field="o.invoice_user_id.partner_id.email"/>
+                        <span class="m-0" t-field="o.invoice_user_id"/><br></br>
+                         <strong>Mobile: </strong><span class="m-0" t-field="o.invoice_user_id.partner_id.mobile"/><br></br>
+                         <strong>Email: </strong><span class="m-0" t-field="o.invoice_user_id.partner_id.email"/><br></br>
+            
                     </div>
                 </div>
 
@@ -70,7 +71,7 @@
                     <thead>
                         <tr>
                             <th name="th_serial"  width="10%" class="text-left">Sr.</th>
-                            <th name="th_description"  width="50%" class="text-left">Description</th>
+                            <th name="th_description"  width="50%" class="text-start">Description</th>
                             <th name="th_quantity" class="text-right">Quantity</th>
                             <th name="th_priceunit" class="text-right">Unit Price</th>
                             <!--                                 <th name="th_discount" t-if="display_discount" class="text-right" -->
@@ -93,8 +94,8 @@
                             <tr>
                                 <t t-set="sr" t-value="sr+1"/>
                                 <td class="text-center"><span t-esc="sr"/></td>
-                                <t class="text-center">
-                                    <td name="td_name" class="text-center">
+                            
+                                    <td name="td_name" class="text-left">
                                         <span t-field="line.name"/>
                                     </td>
                                     <td name="td_quantity" class="text-center">
@@ -107,7 +108,7 @@
                                         <span t-field="line.price_subtotal" t-options='{"widget": "float", "decimal_precision": "Product Unit of Measure"}' />
 
                                     </td>
-                                </t>
+                            
                             </tr>
                         </t>
                     </tbody>
@@ -180,19 +181,19 @@
                     <div class="col-8">
 
                     <strong>Receivers Details</strong><br></br>
-                    <span>Name</span><br></br>
-                    <span>Number</span><br></br>
-                    <span>Email</span><br></br>
-                    <span>Date</span><br></br>
-                   <span>Signature and Stamp</span><br></br><br></br><br></br>
+                    <strong><span>Name</span></strong><br></br>
+                    <strong><span>Mobile</span></strong><br></br>
+                    <strong><span>Email</span></strong><br></br>
+                    <strong><span>Date</span></strong><br></br><br></br><br></br><br></br>
+                   <strong><span>Signature and Stamp</span></strong>
                         </div>
                     <div class="col-5">
                     <strong>Submitted By</strong><br></br>
-                    <span>Name </span> <span t-esc="o.create_uid.partner_id.name"/><br></br>
-                    <span>Number </span><span t-esc="o.create_uid.partner_id.mobile"/><br></br>
-                    <span>Email </span><span t-esc="o.create_uid.partner_id.email"/><br></br>
-                    <span>Date </span><span t-esc="o.invoice_date"/><br></br>
-                    <span>Signature and Stamp</span>
+                    <strong><span>Name </span></strong> <span t-esc="o.create_uid.partner_id.name"/><br></br>
+                    <strong><span>Mobile </span></strong><span t-esc="o.create_uid.partner_id.mobile"/><br></br>
+                    <strong><span>Email </span></strong><span t-esc="o.create_uid.partner_id.email"/><br></br>
+                    <strong><span>Date </span></strong><span t-esc="o.invoice_date"/><br></br><br></br><br></br><br></br>
+                   <strong> <span>Signature and Stamp</span></strong>
 
                 </div>
             </div>
