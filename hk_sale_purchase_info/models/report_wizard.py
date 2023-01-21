@@ -100,8 +100,6 @@ class SaleReportWizard(models.TransientModel):
             'target': 'new', }
 
 
-SaleReportWizard()
-
 
 class bulk_export_excel(models.TransientModel):
     _name = "sale.excel"
@@ -109,5 +107,3 @@ class bulk_export_excel(models.TransientModel):
     excel_file = fields.Binary('Excel File')
     file_name = fields.Char('Excel Name', size=64)
 
-
-bulk_export_excel()
