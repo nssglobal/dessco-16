@@ -14,14 +14,13 @@
             <div class="row" style="margin-bottom:50px">
                 <div class="col-8">
                     <strong>Customer Details:</strong>
-                    <div t-field="o.partner_id"
-                         t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;,&quot;name&quot;,  &quot;phone&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"/>
-                   <t t-if="o.partner_id.vat"><strong> VAT IN: </strong><span t-field="o.partner_id.vat"/><br/><t>
-                    <t t-if="o.partner_id.company_registry"><strong>C.R. </strong><span t-field="o.partner_id.company_registry"/><br/><t>
-                    <t t-if="o.partner_shipping_id"><strong><span>Point of Contact: </span></strong><br/><t>
-                    <t t-if="o.partner_shipping_id"><strong>Name: </strong><span t-field="o.partner_shipping_id.name"/><br/><t>
-                    <t t-if="o.partner_shipping_id.mobile"><strong>Mobile: </strong><span t-field="o.partner_shipping_id.mobile"/><br/><t>
-                    <t t-if="o.partner_shipping_id.email"><strong>Email: </strong><span t-field="o.partner_shipping_id.email"/><t>
+                    <div t-field="o.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;,&quot;name&quot;,  &quot;phone&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"/>
+                   <t t-if="o.partner_id.vat">  <strong> VAT IN: </strong><span t-field="o.partner_id.vat"/><br/></t>
+                    <t t-if="o.partner_id.company_registry">    <strong>C.R. </strong><span t-field="o.partner_id.company_registry"/><br/></t>
+                    <t t-if="o.partner_shipping_id">    <strong><span>Point of Contact: </span></strong><br/></t>
+                    <t t-if="o.partner_shipping_id">    <strong>Name: </strong><span t-field="o.partner_shipping_id.name"/><br/></t>
+                    <t t-if="o.partner_shipping_id.mobile"> <strong>Mobile: </strong><span t-field="o.partner_shipping_id.mobile"/><br/></t>
+                    <t t-if="o.partner_shipping_id.email">  <strong>Email: </strong><span t-field="o.partner_shipping_id.email"/></t>
                 </div>
                 <div class="col-4">
                     <h5 t-if="o.state not in ['draft','sent']">
