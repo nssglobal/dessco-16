@@ -55,8 +55,8 @@
                     <div t-if="o.invoice_user_id" class="mw-100 mb-2">
                         <strong>Salesperson: </strong>
                         <span class="m-0" t-field="o.invoice_user_id"/><br></br>
-                         <strong>Mobile: </strong><span class="m-0" t-field="o.invoice_user_id.partner_id.mobile"/><br></br>
-                         <strong>Email: </strong><span class="m-0" t-field="o.invoice_user_id.partner_id.email"/><br></br>
+                         <t t-if="o.invoice_user_id.partner_id.mobile"> <strong>Mobile: </strong><span class="m-0" t-field="o.invoice_user_id.partner_id.mobile"/><br></br></t>
+                         <t t-if="o.partner_id.company_registry"> <strong>Email: </strong><span class="m-0" t-field="o.invoice_user_id.partner_id.email"/><br></br></t>
             
                     </div>
                 </div>
