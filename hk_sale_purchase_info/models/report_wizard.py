@@ -91,7 +91,7 @@ class SaleReportWizard(models.TransientModel):
         fp = BytesIO()
         workbook.save(fp)
         export_id = self.env['sale.excel'].create(
-            {'excel_file': base64.encodestring(fp.getvalue()), 'file_name': 'Sale/Purchase Report.xls'})
+            {'excel_file': base64.encodebytes(fp.getvalue()), 'file_name': 'Sale/Purchase Report.xls'})
 
         return {
             'type': 'ir.actions.act_url',
@@ -100,6 +100,8 @@ class SaleReportWizard(models.TransientModel):
             'target': 'new', }
 
 
+# SaleReportWizard()
+
 
 class bulk_export_excel(models.TransientModel):
     _name = "sale.excel"
@@ -107,3 +109,5 @@ class bulk_export_excel(models.TransientModel):
     excel_file = fields.Binary('Excel File')
     file_name = fields.Char('Excel Name', size=64)
 
+
+# bulk_export_excel()
