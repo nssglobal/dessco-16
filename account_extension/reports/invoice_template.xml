@@ -189,7 +189,7 @@
                     <strong><span>Date: </span></strong><br></br><br></br><br></br><br></br>
                    <strong><span>Signature and Stamp</span></strong>
                         </div>
-                    <div class="col-5">
+<!--                     <div class="col-5">
                     <strong>Submitted By</strong><br></br>
                     <strong><span>Name: </span></strong> <span t-esc="o.create_uid.partner_id.name"/><br></br>
                     <strong><span>Mobile: </span></strong><span t-esc="o.create_uid.partner_id.mobile"/><br></br>
@@ -197,7 +197,7 @@
                     <strong><span>Date: </span></strong><span t-esc="o.invoice_date"/><br></br><br></br><br></br><br></br>
                    <strong> <span>Signature and Stamp</span></strong>
 
-                </div>
+                </div> -->
             </div>
                    </div>
         </xpath>
