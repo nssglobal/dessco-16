@@ -66,8 +66,8 @@
                                 <strong class="text-center">Sr.</strong>
                             </th>
 
-                            <th class="text-left" name="th_sm_product">
-                                <strong class="text-center">Description</strong>
+                            <th class="text-start" name="th_sm_product">
+                                <strong class="text-start">Description</strong>
                             </th>
                             <th class="text-center" name="th_sm_quantity">
                                 <strong>Quantity</strong>
@@ -84,7 +84,7 @@
                         <tr t-foreach="lines" t-as="move">
                               <t t-set="sr" t-value="sr+1"/>
                                 <td class="text-center"><span t-esc="sr"/></td>
-                            <td class="text-center">
+                            <td class="text-start">
                                 <span t-field="move.product_id.name"/>
                             </td>
                             <td class="text-center">
