@@ -87,7 +87,7 @@
                     <thead style="display: table-row-group">
                         <tr>
                             <th  class="text-center" width="10%" name="th_description">Sr.</th>
-                            <th name="th_description" class="text-left">Description</th>
+                            <th name="th_description" class="text-start">Description</th>
                             <th name="th_quantity" class="text-right">Quantity</th>
                             <th name="th_quantity" class="text-right">UOM</th>
                             <th name="th_priceunit" class="text-right">Unit Price</th>
@@ -115,7 +115,7 @@
                                 <t t-set="sr" t-value="sr+1"/>
                                 <td class="text-center"><span t-esc="sr"/></td>
                                 <t t-if="not line.display_type">
-                                    <td name="td_name" class="text-center">
+                                    <td name="td_name" class="text-start">
                                         <span t-field="line.name"/>
                                     </td>
                                     <td name="td_quantity" class="text-center">
@@ -146,7 +146,7 @@
                                     <t t-set="current_subtotal" t-value="0"/>
                                 </t>
                                 <t t-if="line.display_type == 'line_note'">
-                                    <td name="td_note_line" colspan="99" class="text-left">
+                                    <td name="td_note_line" colspan="99" class="text-start">
                                         <span t-field="line.name"/>
                                     </td>
                                 </t>
