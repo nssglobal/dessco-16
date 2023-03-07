@@ -160,8 +160,8 @@
 
 
 
-<!--                 <div align="left" style="page-break-inside: avoid;"> -->
-<!--                     <strong t-if="o.narration" >GENERAL TERMS &amp; CONDITIONS</strong><p t-field="o.narration"/><br></br><br></br> -->
+                <div align="left" style="page-break-inside: avoid;">
+                    <strong t-if="o.narration" >GENERAL TERMS &amp; CONDITIONS</strong><p t-field="o.narration"/><br></br><br></br>
                       <p t-if="o.invoice_payment_term_id.name">
                         <strong>Payment Terms</strong>
                         <span t-field="o.invoice_payment_term_id.name"/></p>
@@ -177,7 +177,7 @@
                         <strong>Incoterms</strong>
                         <span t-field="o.invoice_incoterm_id.name"/>
                     </p><br></br><br></br><br></br>
-<!--                       </div> -->
+                      </div>
                 
                 <div class="row">
                     <div class="col-8">
