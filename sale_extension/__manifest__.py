@@ -4,6 +4,7 @@
     "category": "Sale",
     "summary": "Sale Extension",
     "author": "HAK Technologies",
+    'license': 'LGPL-3',
     "depends": ["base","sale","purchase"],
 "images": ["static/description/icon.png"],
     "data": [
