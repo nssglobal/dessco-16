@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <template id="de_partner_ledger_pdf_report">
+    <template id="de_customer_ledger_pdf_report">
         <t t-call="web.html_container">
             <t t-call="web.external_layout">
 
                 <div class="page">
                     <div class="text-center">
-                        <h3 class="text-center">Cost Category Summary </h3>
+                        <h3 class="text-center">Sundry Debitor </h3>
                         <!--                                                <t t-foreach="request.env['res.users'].search([('id', '=', data['user_id'])])" t-as="prd">-->
                         <!--                                                    <strong>Name: </strong><span t-field="prd.name"/><br/>-->
                         <!--                                                    <strong>Address:</strong><span t-field="prd.street"/>-->
@@ -24,15 +24,18 @@
                     </div>
                 </div>
                 <table class="table table-sm" name="account_lines_table" style="border-bottom:1px solid black;">
-                    <tr style="border-bottom:1px solid black;">
-                        <td style="border-bottom:1px solid black;"><strong>Salesman</strong></td>
-                        <!--                            <td style="border-bottom:1px solid black;"><strong>Voucher#</strong></td>-->
-                        <!--                            <td style="border-bottom:1px solid black;"><strong>Details</strong></td>-->
-                        <td style="border-bottom:1px solid black;" class="text-right"><strong>Debit</strong></td>
-                        <td style="border-bottom:1px solid black;" class="text-right"><strong>Credit</strong></td>
-                        <!--                            <td style="border-bottom:1px solid black;" class="text-right"><strong>Amount In Currency</strong></td>-->
-                                                    <td style="border-bottom:1px solid black;" class="text-right"><strong>Balance</strong></td>
+<!--                    <tr></tr>-->
+                    <tr style="border:1px solid black;" >
+                        <td rowspan="2" style="border:1px solid black;"><strong>Particulars</strong></td>
+                        <td style="border:1px solid black;" class="text-center" colspan="2"><strong>Closing</strong></td>
+<!--                        <td style="border-bottom:1px solid black;" class="text-right"><strong>Credit</strong></td>-->
                     </tr>
+                    <tr style="border:1px solid black;">
+                        <td style="border:1px solid black;" class="text-center"><strong>Debit</strong></td>
+                        <td style="border:1px solid black;" class="text-center"><strong>Credit</strong></td>
+<!--                        <td style="border-bottom:1px solid black;" class="text-right"><strong>Credit</strong></td>-->
+                    </tr>
+
                     <tbody>
                         <!--                            <tr>-->
                         <!--                                <strong> <td style="border-bottom:1px solid black;" colspan="5" class="text-left"><strong>Opening Balance</strong></td></strong>-->
@@ -46,18 +49,26 @@
                         <!--                            <t t-set="total_credit" t-value="0"/>-->
                         <tr t-foreach="users" t-as="user" style="font-size: 13px;" >
                             <t t-set="debit" t-value="get_user_debit(user)"/>
-                            <t t-set="credit" t-value="get_user_credit(user)"/>
+<!--                            <t t-set="credit" t-value="get_user_credit(user)"/>-->
                             <!--                                <t t-set="total_debit" t-value="total_debit + d.debit"/>-->
                             <!--                                <t t-set="total_credit" t-value="total_credit + d.credit"/>-->
                             <!--                                <t t-set="amount_currency" t-value="amount_currency+(d.amount_currency)"/>-->
                             <!--                                <td style="border-bottom:1px solid black;" class="text-left"><span t-esc="d.date" t-options="{'widget': 'date'}"/></td>-->
-                            <td style="border-bottom:1px solid black;" class="text-left"><span t-esc="user.name"/></td>
+                            <td style="font-weight:bold;" class="text-left"><span t-esc="user.name"/></td>
 
-                                                            <td style="border-bottom:1px solid black;" class="text-right"><t t-esc="'{0:,.2f}'.format(debit)"/></td>
-                                                            <td style="border-bottom:1px solid black;" class="text-right"><t t-esc="'{0:,.2f}'.format(credit)"/></td>
+                            <td style="font-weight:bold;" class="text-center"><t t-esc="'{0:,.2f}'.format(debit)"/></td>
+                            <td class="text-center"></td>
+                            <t t-set="customers_dict" t-value="get_users_customer(user)"/>
+                            <tr t-foreach="customers_dict" t-as="val" style="font-size:11px;">
+                                <td class="text-center"><span t-esc="val['partner']"/></td>
+                                <td class="text-center"><span t-esc="'{0:,.2f}'.format(val['balance'])"/></td>
+                                <td class="text-center"></td>
+                            </tr>
+<!--                            <td style="font-weight:bold;" class="text-center"><t t-esc="'{0:,.2f}'.format(debit)"/></td>-->
+<!--                                                            <td style="border-bottom:1px solid black;" class="text-right"><t t-esc="'{0:,.2f}'.format(credit)"/></td>-->
                             <!--                                <td style="border-bottom:1px solid black;" class="text-right"><t t-esc="'{0:,.0f}'.format(int(d.credit))"/></td>-->
                             <!--                                <td style="border-bottom:1px solid black;" class="text-right"><t t-esc="d.amount_currency" t-options='{"widget": "monetary", "display_currency": d.currency_id}'/></td>-->
-                                                            <td style="border-bottom:1px solid black;" class="text-right"><t t-esc="'{0:,.0f}'.format(int(debit-credit))"/></td>
+<!--                                                            <td style="border-bottom:1px solid black;" class="text-right"><t t-esc="'{0:,.0f}'.format(int(debit-credit))"/></td>-->
                         </tr>
                         <!--                            <tr style="border-top:1px solid #000;">-->
                         <!--                                <td  style="border-bottom:1px solid black;font-size:13px;" colspan="3" class="text-left"><strong>Closing Balance</strong></td>-->

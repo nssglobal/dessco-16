@@ -1,6 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
+     <record id="customer_ledger_wizard_report" model="ir.ui.view">
+        <field name="name">customer.ledger.wizard.report</field>
+        <field name="model">customer.ledger</field>
+        <field name="arch" type="xml">
+            <form string="customer Ledger">
+                <group>
+                    <group>
+                        <field name="start_date"/>
+                        <field name="user_ids" widget="many2many_tags"/>
+                    </group>
+                    <group>
+                        <field name="end_date"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="print_report" type="object" string="Print" class="oe_highlight"/>
+                    <button string="Cancel" class="btn btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_customer_ledger_wizard" model="ir.actions.act_window">
+        <field name="name">Customer Wise Report</field>
+        <field name="res_model">customer.ledger</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+<!--    <menuitem id="menu_partner_ledger_report_contact" name="Partner Ledger" parent="contacts.menu_contacts" action="action_partner_ledger_wizard" sequence="150" />-->
+    <menuitem id="menu_customer_ledger_report" name="Customer Wise Report" parent="account.account_reports_management_menu" action="action_customer_ledger_wizard" sequence="151" />
+
     <record id="partner_ledger_wizard_report" model="ir.ui.view">
         <field name="name">partner.ledger.wizard.report</field>
         <field name="model">partner.ledger</field>
