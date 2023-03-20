@@ -4,6 +4,7 @@
     "category": "Inventory",
     "summary": "Stock Extension",
     "author": "HAK Technologies",
+    'license': 'LGPL-3',
     "depends": ["base","stock","sale_extension","basic_extension"],
     "data": [
             "views/stock.xml", 
