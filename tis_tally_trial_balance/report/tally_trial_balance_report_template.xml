@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_tally_trial_balance">
+        <t t-call="web.html_container">
+            <t t-call="web.internal_layout">
+                <div class="page">
+
+                    <table class="table-condensed" style="width:100%;">
+                        <thead style="border-collapse: collapse;border: 1px solid black;">
+                            <tr>
+                                <th rowspan="4"></th>
+                                <th style="color:white;">
+                                    .........................................................................................
+                                </th>
+                                <th style="border-collapse: collapse;border: 1px solid black;" class="text-right"
+                                    colspan="2">
+                                    <span t-esc="res_company.name"/>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th style="float:left;">Particulars</th>
+                                <th style="border-collapse: collapse;border: 1px solid black;" class="text-right"
+                                    colspan="2">
+                                    <t t-if="data['date_from']">
+                                        <span t-esc="datetime.datetime.strptime(data['date_from'], '%Y-%m-%d').strftime('%d-%m-%Y')"/>
+                                        to
+                                    </t>
+                                    <t t-if="data['date_to']">
+                                        <span t-esc="datetime.datetime.strptime(data['date_to'], '%Y-%m-%d').strftime('%d-%m-%Y')"/>
+                                    </t>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th></th>
+                                <th style="border-collapse: collapse;border: 1px solid black;" class="text-right"
+                                    colspan="2">
+                                    Trial Balance
+                                </th>
+                            </tr>
+                        </thead>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        <tr style="background-color:#cfcfcf;">
+                            <th></th>
+                            <th></th>
+                            <th class="text-right">Debit Balance</th>
+                            <th class="text-right">Credit Balance</th>
+                        </tr>
+                          <tbody>
+                            <t t-set="debit_balance" t-value="0"/>
+                            <t t-set="credit_balance" t-value="0"/>
+                            <tr t-foreach="Accounts" t-as="account">
+                                <td>
+                                    <!--                                    <t t-if="account['balance'] != 0">-->
+                                    <span t-att-style="style" t-esc="account['name']"/>
+                                    <!--                                    </t>-->
+                                </td>
+                                <td></td>
+                                <td class="text-right">
+                                    <t t-if="account['balance'] > 0">
+                                        <span t-att-style="style" t-esc="account['balance']"
+                                              t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                        <t t-set="debit_balance" t-value="debit_balance + account['balance']"/>
+                                    </t>
+                                    <t t-if="account['balance'] == 0">
+                                        <span t-att-style="style" t-esc="abs(account['balance'])"
+                                              t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                    </t>
+                                </td>
+                                <td class="text-right">
+                                    <t t-if="account['balance'] &lt; 0">
+                                        <span t-att-style="style" t-esc="abs(account['balance'])"
+                                              t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                        <t t-set="credit_balance" t-value="credit_balance + account['balance']"/>
+                                    </t>
+                                    <t t-if="account['balance'] == 0">
+                                        <span t-att-style="style" t-esc="abs(account['balance'])"
+                                              t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                    </t>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Grand Total</th>
+                                <th></th>
+                                <th class="text-right">
+                                    <span t-esc="debit_balance"
+                                          t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                </th>
+                                <th class="text-right">
+                                    <span t-esc="abs(credit_balance)"
+                                          t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                </th>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

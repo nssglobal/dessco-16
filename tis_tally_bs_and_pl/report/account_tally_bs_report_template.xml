@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_tally_bs_document">
+        <t t-call="web.internal_layout">
+            <t t-foreach="doc" t-as="o">
+                <div class="page">
+                    <div class="text-center">
+                        <h2 t-esc="data['account_report_id'][1]"/>
+                        <div style="margin-top:-10px;">
+                            <t t-if="data['date_from'] and data['date_to']">
+                                <span t-esc="o.date_format(data['date_from'])"/>
+                                <span t-esc="o.date_format(data['date_from'])"/>
+                                <span t-esc="o.debit_credit"/>
+                                <span>to</span>
+                                <span t-esc="o.date_format(data['date_to'])"/>
+                            </t>
+                            <t t-elif="data['date_from']">
+                                <span>from</span>
+                                <span t-esc="o.date_format(data['date_from'])"/>
+                            </t>
+                            <t t-elif="data['date_to']">
+                                <span>till</span>
+                                <span t-esc="o.date_format(data['date_to'])"/>
+                            </t>
+                        </div>
+                        <br/>
+                    </div>
+                    <t t-set="tr_no_r" t-value="0"/>
+                    <t t-set="tr_no_l" t-value="0"/>
+                    <table class="table table-bordered mt32" >
+                        <tbody>
+                            <t t-set="flag" t-value="0"/>
+                            <t t-foreach="get_account_lines" t-as="a">
+                                <t t-if="a['level'] != 0">
+                                    <t t-if="int(a.get('level')) &gt; 3">
+                                        <t t-set="style" t-value="'font-weight: normal;padding-left:10px;'"/>
+                                    </t>
+                                    <t t-if="not int(a.get('level')) &gt; 3">
+                                        <t t-set="style" t-value="'font-weight: bold;padding-right:10px'"/>
+                                    </t>
+                                    <t t-if="int(a.get('level')) == 1">
+                                        <t t-set="flag" t-value="flag + 1"/>
+                                    </t>
+                                    <tr t-if="flag == 2 and int(a.get('level'))==1">
+                                        <td
+                                                style="border: 1px solid black;border-right:none;width:210px;height:30px;padding-top:10px;padding-left:20px;">
+                                            <span t-att-style="style" t-esc="a.get('name')"/>
+                                        </td>
+                                        <td class="text-right"
+                                            style="white-space: text-nowrap;border: 1px solid black;border-left:none;border-right:none;width:210px;height:30px;padding-top:10px;padding-right:30px;">
+                                            <span t-if="data['date_to']">as at</span>
+                                            <span t-if="data['date_to']" t-esc="o.date_format(data['date_to'])"/>
+                                        </td>
+                                    </tr>
+                                    <tr t-if="flag == 2">
+                                        <t t-set="tr_no_r" t-value="tr_no_r+1"/>
+                                        <td
+                                                style="border:none; width:210px;height:30px;padding-top:10px;">
+                                            <span style="color: white;" t-esc="'.' * int(a.get('level', 0))"/>
+                                            <span t-att-style="style" t-esc="o.account_name(a.get('name'))"/>
+                                        </td>
+                                        <td
+                                                t-att-class="'text-right' if not int(a.get('level')) &gt; 3 else 'text-left'"
+                                                style="white-space: text-nowrap;border:none; width:190px;height:30px;padding-top:10px;">
+                                            <span t-att-style="style" t-esc="a.get('balance')"
+                                                  t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </t>
+                            <t t-set="flag" t-value="0"/>
+                            <t t-foreach="get_account_lines" t-as="a">
+                                <t t-if="a['level'] != 0">
+                                    <t t-if="int(a.get('level')) == 1">
+                                        <t t-set="flag" t-value="flag + 1"/>
+                                    </t>
+                                    <tr>
+                                        <td t-if="flag == 2 and int(a.get('level'))==1"
+                                            style="border: 1px solid black;border-right:none;width:230px;height:30px;padding-top:10px;padding-left:20px;font-weight: bold;padding-right:10px">
+                                            Total
+                                        </td>
+                                        <td t-if="flag == 2 and int(a.get('level'))==1" class="text-right"
+                                            style="white-space: text-nowrap;border: 1px solid black;border-left:none;border-right:none;width:150px;height:30px;padding-top:10px;padding-right:30px;font-weight: bold;padding-right:10px">
+                                            <span t-att-style="style" t-esc="abs(a.get('balance'))"
+                                                  t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </t>
+                        </tbody>
+                    </table>
+<!--                    <t t-if="o.debit_credit">-->
+                    <table border="1" style="width:700pt; height:150pt;">
+                        <tbody>
+                            <t t-set="flag" t-value="0"/>
+                            <t t-foreach="get_account_lines" t-as="a">
+                                <t t-if="a['level'] != 0">
+                                    <t t-if="int(a.get('level')) &gt; 3">
+                                        <t t-set="style" t-value="'font-weight: normal;padding-left:20px;'"/>
+                                    </t>
+                                    <t t-if="not int(a.get('level')) &gt; 3">
+                                        <t t-set="style" t-value="'font-weight: bold;padding-right:10px;'"/>
+                                    </t>
+
+                                    <t t-if="int(a.get('level')) == 1">
+                                        <t t-set="flag" t-value="flag + 1"/>
+                                        <t t-set="total" t-value="a.get('balance')"/>
+                                    </t>
+                                    <tr t-if="flag &lt; 2 and int(a.get('level'))==1">
+                                        <td
+                                                style="border: 1px solid black;border-left:none;border-right:none;width:250px;height:30px;padding-top:10px;">
+                                            <span t-att-style="style" t-esc="a.get('name')"/>
+                                        </td>
+                                        <td
+                                                style="white-space: text-nowrap;border: 1px solid black;border-left:none;border-right:none;width:250px;height:30px;padding-top:10px;padding-right:30px;">
+
+                                            <span t-if="data['date_to']">as at</span>
+                                            <span t-if="data['date_to']" t-esc="o.date_format(data['date_to'])"/>
+                                        </td>
+                                    </tr>
+                                    <td class="o_mrp_bom_cost text-left"  t-if="a['account_type'] == 'account_type'" style="white-space: text-nowrap;border: 1px solid black;border-left:none;border-right:none;" >
+                                        <span style="font-size: 30px; font-weight: bold;" t-esc="a['name']" />
+                                        <table>
+                                        <tr  style="border-bottom: 1px solid black !important;width: 3in;" t-foreach="get_account_lines" t-as="b">
+                                    <td t-if="b['parent_type'] == a['name']"  >
+                                            <span  t-esc="b['name']"/>
+                                        </td>
+                                    <td t-if="b['parent_type'] == a['name']">
+                                            <span  t-esc="b['balance']"/>
+                                        </td>
+                                        </tr>
+
+                                        </table><table>Total : <t t-if="a['account_type'] == 'account_type'"><span  t-esc="a['balance']"/></t></table></td>
+
+
+
+                                </t>
+
+                            </t>
+
+                        </tbody>
+                    </table>
+<!--                    </t>-->
+                </div>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_tally_bs">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="tis_tally_bs_and_pl.report_tally_bs_document"/>
+            </t>
+        </t>
+    </template>
+</odoo>

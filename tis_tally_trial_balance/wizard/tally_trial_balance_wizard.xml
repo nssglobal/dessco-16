@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="account_balance_report_inherit_tally_trail_balance" model="ir.ui.view">
+        <field name="name">Tally Trail Balance</field>
+        <field name="model">account.balance.report</field>
+        <field name="inherit_id" ref="accounting_pdf_reports.account_report_balance_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_to']" position="after">
+                <field name="report_type" widget="radio" options="{'horizontal': True}"/>
+            </xpath>
+            <xpath expr="//footer/button[@name='check_report']" position="after">
+                <button name="check_report_tally_trial_balance" string="Print" type="object"
+                        attrs="{'invisible': [('report_type', 'in', 'normal')]}" class="btn-primary"/>
+                <button name="print_tally_trial_balance_xls_report" string="Export" type="object"
+                        attrs="{'invisible': [('report_type', 'in', 'normal')]}" class="btn-primary"/>
+            </xpath>
+            <xpath expr="//footer/button[@name='check_report']" position="attributes">
+                <attribute name="attrs">{'invisible': [('report_type', 'in', 'tally')]}</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

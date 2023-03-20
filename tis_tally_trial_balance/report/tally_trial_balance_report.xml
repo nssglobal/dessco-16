@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+                id="action_tally_trial_balance"
+                string="Tally trial Balance"
+                model="account.balance.report"
+                report_type="qweb-pdf"
+                name="tis_tally_trial_balance.report_tally_trial_balance"
+                file="tis_tally_trial_balance.report_tally_trial_balance"
+        />
+    </data>
+</odoo>

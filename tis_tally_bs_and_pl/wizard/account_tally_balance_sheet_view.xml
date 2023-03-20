@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="tally_bs_report_view" model="ir.ui.view">
+        <field name="name">Accounting Report</field>
+        <field name="model">accounting.report</field>
+        <field name="inherit_id" ref="accounting_pdf_reports.accounting_report_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_to']" position="after">
+                <field name="report_type" widget="radio" options="{'horizontal': true}"/>
+            </xpath>
+
+            <xpath expr="//footer/button[@name='check_report']" position="after">
+                <button name="print_tally_bs" string="Print" type="object" default_focus="1"
+                        attrs="{'invisible': [('report_type', 'not in', ['tally'])]}"
+                        class="oe_highlight"/>
+                <button name="export_tally_bs" string="Export" type="object" default_focus="1"
+                        attrs="{'invisible': [('report_type', 'not in', ['tally'])]}"
+                        class="oe_highlight"/>
+            </xpath>
+            <xpath expr="//footer/button[@name='check_report']" position="attributes">
+                <attribute name="attrs">{'invisible': [('report_type', 'in', ['tally'])]}</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
+
+
