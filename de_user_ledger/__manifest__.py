@@ -10,7 +10,7 @@
     'version': '14.0',
     'summary': 'This module will add User Ledger Report',
     'description': '',
-    'author': 'Dynexcel',
+    'author': 'HAKTechnologies',
     'maintainer': 'Hunain AK',
     'company': 'Hunain AK',
     'website': 'https://www.Hunain AK.com',

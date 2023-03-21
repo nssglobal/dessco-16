@@ -17,13 +17,13 @@ class CustomerReport(models.AbstractModel):
              ('move_id.state', '=', 'posted'), ('account_id.account_type', '=', 'asset_receivable')], order="date asc").mapped('debit'))
         return partner_ledger
 
-    # def get_user_credit(self, user):
-    #     model = self.env.context.get('active_model')
-    #     rec_model = self.env[model].browse(self.env.context.get('active_id'))
-    #     partner_ledger = sum(self.env['account.move.line'].search(
-    #         [('move_id.user_id', '=', user.id), ('date', '>=', rec_model.start_date), ('date', '<=', rec_model.end_date),
-    #          ('move_id.state', '=', 'posted'), ('account_id.account_type', '=', 'asset_receivable')], order="date asc").mapped('credit'))
-    #     return partner_ledger
+    def get_user_credit(self, user):
+        model = self.env.context.get('active_model')
+        rec_model = self.env[model].browse(self.env.context.get('active_id'))
+        partner_ledger = sum(self.env['account.move.line'].search(
+            [('move_id.user_id', '=', user.id), ('date', '>=', rec_model.start_date), ('date', '<=', rec_model.end_date),
+             ('move_id.state', '=', 'posted'), ('account_id.account_type', '=', 'asset_receivable')], order="date asc").mapped('credit'))
+        return partner_ledger
 
     def get_users_customer(self, user):
         model = self.env.context.get('active_model')
@@ -65,6 +65,6 @@ class CustomerReport(models.AbstractModel):
 
             'data': data,
             'get_user_debit': self.get_user_debit,
-            # 'get_user_credit': self.get_user_credit,
+            'get_user_credit': self.get_user_credit,
             'get_users_customer': self.get_users_customer,
         }

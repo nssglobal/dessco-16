@@ -25,6 +25,28 @@ class CustomReport(models.AbstractModel):
              ('move_id.state', '=', 'posted'), ('account_id.account_type', '=', 'asset_receivable')], order="date asc").mapped('credit'))
         return partner_ledger
 
+    def get_opening_debit(self):
+        model = self.env.context.get('active_model')
+        rec_model = self.env[model].browse(self.env.context.get('active_id'))
+        open_bal = sum(self.env['account.move.line'].search(
+            [('date', '<', rec_model.start_date),
+             ('move_id.state', '=', 'posted'), ('account_id.account_type', '=', 'asset_receivable')]).mapped('debit'))
+        # bal = 0
+        # for rec in open_bal:
+        #     bal = bal + rec.balance
+        return open_bal
+
+    def get_opening_credit(self):
+        model = self.env.context.get('active_model')
+        rec_model = self.env[model].browse(self.env.context.get('active_id'))
+        open_bal = sum(self.env['account.move.line'].search(
+            [('date', '<', rec_model.start_date),
+             ('move_id.state', '=', 'posted'), ('account_id.account_type', '=', 'asset_receivable')]).mapped('credit'))
+        # bal = 0
+        # for rec in open_bal:
+        #     bal = bal + rec.balance
+        return open_bal
+
     def get_print_date(self):
         now_utc_date = datetime.now()
         now_dubai = now_utc_date.astimezone(timezone('Asia/Karachi'))
@@ -42,4 +64,6 @@ class CustomReport(models.AbstractModel):
             'data': data,
             'get_user_debit': self.get_user_debit,
             'get_user_credit': self.get_user_credit,
+            'get_opening_debit': self.get_opening_debit,
+            'get_opening_credit': self.get_opening_credit,
         }
