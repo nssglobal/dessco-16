@@ -17,7 +17,7 @@ Add additional features
     'price': 35,
     'currency': 'EUR',
     'license': 'Other proprietary',
-    'depends': ['accounting_pdf_reports'
+    'depends': ['account'
 ],
     'data': [
         'report/account_tally_bs_report_template.xml',
