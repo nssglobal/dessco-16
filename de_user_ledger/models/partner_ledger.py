@@ -32,21 +32,24 @@ class CustomerLedger(models.TransientModel):
         return self.env.ref('de_user_ledger.customer_ledger_pdf').report_action(self, data)
 
 
-# class ResPartner(models.Model):
-#     _inherit = 'res.partner'
-#
-#     def action_partner_ledger(self):
-#         return {
-#             'type': 'ir.actions.act_window',
-#             'name': 'Partner Ledger',
-#             'view_id': self.env.ref('de_user_ledger.partner_ledger_wizard_report', False).id,
-#             'target': 'new',
-#             'res_model': 'partner.ledger',
-#             'context': {'default_partner_id': self.id},
-#             'view_mode': 'form',
-#         }
+class LedgerReport(models.TransientModel):
+    _name = 'ledger.report'
+
+    start_date = fields.Date(string='From Date', required=True, default=fields.Date.today().replace(day=1))
+    end_date = fields.Date(string='To Date', required=True, default=fields.Date.today())
+    partner_id = fields.Many2one('res.partner', string='Partner', required=True, help='Select Partner for movement')
+
+    def print_report(self):
+        data = {'user_ids': self.partner_id.id, 'start_date': self.start_date, 'end_date': self.end_date}
+        return self.env.ref('de_user_ledger.action_ledger_pdf').report_action(self, data)
 
 
+class AccountMoveInh(models.Model):
+    _inherit = 'account.move'
+
+    def get_overdue_days(self):
+        days = (datetime.today().date() - self.invoice_date_due).days
+        return days
 
 
 

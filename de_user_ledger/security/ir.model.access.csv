@@ -1,3 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 partner_ledger_rprt,partnerledgerreport,model_partner_ledger,account.group_account_invoice,1,1,1,1
 customer_ledger_rprt,customerledgerreport,model_customer_ledger,,1,1,1,1
+ledger_report_rprt,ledgerreport,model_ledger_report,,1,1,1,1
