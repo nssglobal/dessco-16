@@ -30,7 +30,11 @@
                             <!--                        <td style="border-bottom:1px solid black;" class="text-right"><strong>Credit</strong></td>-->
                         </tr>
                         <tbody>
+                            <t t-set="total_opening" t-value="0"/>
+                            <t t-set="total_pending" t-value="0"/>
                             <tr t-foreach="ledgers" t-as="line" style="font-size: 13px;" >
+                                <t t-set="total_opening" t-value="total_opening + line.amount_total"/>
+                                <t t-set="total_pending" t-value="total_pending + line.amount_residual"/>
 <!--                                <t t-set="debit" t-value="get_user_debit(partner)"/>-->
 <!--                                <t t-set="credit" t-value="get_user_credit(partner)"/>-->
                                 <td style="font-weight:bold;" class="text-center"><span t-esc="line.invoice_date"/></td>
@@ -41,16 +45,16 @@
 <!--                                <td style="font-weight:bold;text-align:center;"><t t-esc="'{0:,.2f}'.format(line.amount_residual)"/></td>-->
                                 <td style="font-weight:bold;text-align:center;"><t t-esc="line.invoice_date_due"/></td>
                                 <td style="font-weight:bold;text-align:center;"><t t-esc="line.get_overdue_days()"/></td>
-                                <!--                            <td class="text-center"></td>-->
-<!--                                <t t-set="customers_dict" t-value="get_users_customer(user)"/>-->
-<!--                                <tr t-foreach="customers_dict" t-as="val" style="font-size:11px;">-->
-<!--                                    <td style="border:none;" ><span style="border:none;margin-left:20px;" t-esc="val['partner']"/></td>-->
-<!--                                    <td style="font-weight:bold;text-align:right;border:none;"><span t-esc="'{0:,.2f}'.format(val['balance'])"/></td>-->
-<!--                                    <td class="text-center" style="font-weight:bold;border:none;"></td>-->
-<!--                                </tr>-->
+
+
 
                             </tr>
-
+                            <tr class="text-center" style="font-size:14px;">
+                                <td colspan="2" ><strong>Total</strong></td>
+                                <td ><strong><t t-esc="'{0:,.2f}'.format(total_opening)"/></strong></td>
+                                <td><strong><t t-esc="'{0:,.2f}'.format(total_pending)"/></strong></td>
+                                <td colspan="2"><strong></strong></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

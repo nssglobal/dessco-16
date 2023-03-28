@@ -13,40 +13,27 @@ class CustomerReport(models.AbstractModel):
         model = self.env.context.get('active_model')
         rec_model = self.env[model].browse(self.env.context.get('active_id'))
         partner_ledger = sum(self.env['account.move'].search(
-            [('user_id', 'in', rec_model.user_ids.ids), ('invoice_date', '>=', rec_model.start_date), ('invoice_date', '<=', rec_model.end_date),
-             ('state', '=', 'posted')]).mapped('amount_residual'))
-        return partner_ledger
-
-    def get_user_credit(self, user):
-        model = self.env.context.get('active_model')
-        rec_model = self.env[model].browse(self.env.context.get('active_id'))
-        partner_ledger = sum(self.env['account.move.line'].search(
-            [('move_id.user_id', '=', user.id), ('date', '>=', rec_model.start_date), ('date', '<=', rec_model.end_date),
-             ('move_id.state', '=', 'posted')], order="date asc").mapped('credit'))
+            [('user_id', '=', user.id), ('invoice_date', '>=', rec_model.start_date), ('invoice_date', '<=', rec_model.end_date),
+             ('state', '=', 'posted'), ('move_type', '=', 'out_invoice')], order="invoice_date asc").mapped('amount_residual'))
         return partner_ledger
 
     def get_users_customer(self, user):
         model = self.env.context.get('active_model')
         rec_model = self.env[model].browse(self.env.context.get('active_id'))
-        partners = self.env['account.move.line'].search(
-            [('move_id.user_id', '=', user.id), ('date', '>=', rec_model.start_date),
-             ('date', '<=', rec_model.end_date),
-             ('move_id.state', '=', 'posted')], order="date asc").mapped('partner_id')
-        account_obj = self.env['account.move.line']
+        partners = self.env['account.move'].search(
+            [('user_id', '=', user.id), ('invoice_date', '>=', rec_model.start_date), ('invoice_date', '<=', rec_model.end_date),
+             ('state', '=', 'posted'), ('move_type', '=', 'out_invoice')], order="invoice_date asc").mapped('partner_id')
+        account_obj = self.env['account.move']
         data_dict = []
         for partner in partners:
-            debit = sum(account_obj.search(
-                [('partner_id', '=', partner.id), ('date', '>=', rec_model.start_date),
-                 ('date', '<=', rec_model.end_date),
-                 ('move_id.state', '=', 'posted'), ('account_id.account_type', '=', 'asset_receivable')],
-                order="date asc").mapped('debit'))
+            amount = sum(account_obj.search(
+            [('partner_id', '=', partner.id),('user_id', '=', user.id), ('invoice_date', '>=', rec_model.start_date), ('invoice_date', '<=', rec_model.end_date),
+             ('state', '=', 'posted'), ('move_type', '=', 'out_invoice')], order="invoice_date asc").mapped('amount_residual'))
             data_dict.append({
                 'partner': partner.name,
-                'balance': debit,
+                'balance': amount,
             })
         return data_dict
-
-
 
 
     def get_print_date(self):
@@ -65,6 +52,6 @@ class CustomerReport(models.AbstractModel):
 
             'data': data,
             'get_user_debit': self.get_user_debit,
-            'get_user_credit': self.get_user_credit,
+            # 'get_user_credit': self.get_user_credit,
             'get_users_customer': self.get_users_customer,
         }

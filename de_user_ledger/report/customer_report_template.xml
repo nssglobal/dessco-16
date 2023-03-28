@@ -39,11 +39,11 @@
                         <tbody>
                             <tr t-foreach="users" t-as="user" style="font-size: 13px;" >
                                 <t t-set="debit" t-value="get_user_debit(user)"/>
-                                <t t-set="credit" t-value="get_user_credit(user)"/>
+<!--                                <t t-set="credit" t-value="get_user_credit(user)"/>-->
                                 <td style="font-weight:bold;border:none;" class="text-left"><span t-esc="user.name"/></td>
 
                                 <td style="font-weight:bold;text-align:right;border:none;" ><t t-esc="'{0:,.2f}'.format(debit)"/></td>
-                                <td style="font-weight:bold;text-align:right;"><t t-esc="'{0:,.2f}'.format(credit)"/></td>
+                                <td style="font-weight:bold;text-align:right;"></td>
                                 <!--                            <td class="text-center"></td>-->
                                 <t t-set="customers_dict" t-value="get_users_customer(user)"/>
                                 <tr t-foreach="customers_dict" t-as="val" style="font-size:11px;">
