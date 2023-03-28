@@ -18,7 +18,7 @@
                         <td style="border:1px solid black;" class="text-left"><strong>Particulars</strong></td>
                         <td style="border:1px solid black;" class="text-center"><strong>Debit</strong></td>
                         <td style="border:1px solid black;" class="text-center"><strong>Credit</strong></td>
-                        <td style="border:1px solid black;border-top:none;" class="text-center"><strong>Balance</strong></td>
+                        <td style="border:1px solid black;" class="text-center"><strong>Balance</strong></td>
 
                     </tr>
                     <tbody>
