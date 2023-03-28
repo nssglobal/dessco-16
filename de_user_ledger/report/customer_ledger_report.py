@@ -14,7 +14,7 @@ class CustomerReport(models.AbstractModel):
         rec_model = self.env[model].browse(self.env.context.get('active_id'))
         partner_ledger = sum(self.env['account.move.line'].search(
             [('move_id.user_id', '=', user.id), ('date', '>=', rec_model.start_date), ('date', '<=', rec_model.end_date),
-             ('move_id.state', '=', 'posted'), ('account_id.account_type', '=', 'asset_receivable')], order="date asc").mapped('debit'))
+             ('move_id.state', '=', 'posted')], order="date asc").mapped('debit'))
         return partner_ledger
 
     def get_user_credit(self, user):
@@ -22,7 +22,7 @@ class CustomerReport(models.AbstractModel):
         rec_model = self.env[model].browse(self.env.context.get('active_id'))
         partner_ledger = sum(self.env['account.move.line'].search(
             [('move_id.user_id', '=', user.id), ('date', '>=', rec_model.start_date), ('date', '<=', rec_model.end_date),
-             ('move_id.state', '=', 'posted'), ('account_id.account_type', '=', 'asset_receivable')], order="date asc").mapped('credit'))
+             ('move_id.state', '=', 'posted')], order="date asc").mapped('credit'))
         return partner_ledger
 
     def get_users_customer(self, user):
@@ -31,7 +31,7 @@ class CustomerReport(models.AbstractModel):
         partners = self.env['account.move.line'].search(
             [('move_id.user_id', '=', user.id), ('date', '>=', rec_model.start_date),
              ('date', '<=', rec_model.end_date),
-             ('move_id.state', '=', 'posted'), ('account_id.account_type', '=', 'asset_receivable')], order="date asc").mapped('partner_id')
+             ('move_id.state', '=', 'posted')], order="date asc").mapped('partner_id')
         account_obj = self.env['account.move.line']
         data_dict = []
         for partner in partners:
