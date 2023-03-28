@@ -27,7 +27,7 @@
                     </div>
                     <t t-set="tr_no_r" t-value="0"/>
                     <t t-set="tr_no_l" t-value="0"/>
-                    <table class="table table-bordered mt32" >
+                    <table class="table table-sm" >
                         <tbody>
                             <t t-set="flag" t-value="0"/>
                             <t t-foreach="get_account_lines" t-as="a">
@@ -90,7 +90,7 @@
                         </tbody>
                     </table>
 <!--                    <t t-if="o.debit_credit">-->
-                    <table border="1" style="width:700pt; height:150pt;">
+                    <table class="table table-sm" border="1" style="width:700pt; height:150pt;">
                         <tbody>
                             <t t-set="flag" t-value="0"/>
                             <t t-foreach="get_account_lines" t-as="a">
