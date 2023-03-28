@@ -19,11 +19,33 @@
                         <td style="border:1px solid black;border-top:none;" class="text-center"><strong>Balance</strong></td>
 
                     </tr>
-                    <tbody>
-
-                        <tr t-foreach="users" t-as="user" style="font-size: 13px;" >
-                            <td style="border:none;" class="text-left"><span t-esc="user.name"/></td>
-
+                   <tbody>
+<tr>
+<strong>
+<td class="text-left">
+<strong>Primary Cost Category</strong>
+</td>
+</strong>
+<td style="border-bottom:1px solid black;text-align:right;">
+<strong>
+<span t-esc="'{0:,.2f}'.format(get_opening_debit())"/>
+</strong>
+</td>
+<td style="border-bottom:1px solid black;text-align:right;">
+<strong>
+<span t-esc="'{0:,.2f}'.format(get_opening_credit())"/>
+</strong>
+</td>
+<td style="border-bottom:1px solid black;text-align:right;">
+<strong>
+<span t-esc="'{0:,.2f}'.format(get_opening_debit()-get_opening_credit())"/>
+</strong>
+</td>
+<!--                             <td style="border-bottom:1px solid black;" class="text-right"><strong><span t-esc="'{0:,.0f}'.format(int(openbal))"/></strong></td> -->
+</tr>
+<tr t-foreach="users" t-as="user" style="font-size: 13px;">
+<t t-set="debit" t-value="get_user_debit(user)"/>
+<t t-set="credit" t-value="get_user_credit(user)"/>
 <td style="border:none;" class="text-left">
 <span t-esc="user.name"/>
 </td>
@@ -36,8 +58,8 @@
 <td style="text-align:right;border:none;">
 <t t-esc="'{0:,.2f}'.format(debit-credit)"/>
 </td>
-                        </tr>
-                    </tbody>
+</tr>
+</tbody>
                 </table>
             </t>
         </t>
