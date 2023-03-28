@@ -13,7 +13,7 @@ class CustomerReport(models.AbstractModel):
         model = self.env.context.get('active_model')
         rec_model = self.env[model].browse(self.env.context.get('active_id'))
         partner_ledger = sum(self.env['account.move'].search(
-            [('user_id', '=', user.id), ('invoice_date', '>=', rec_model.start_date), ('invoice_date', '<=', rec_model.end_date),
+            [('user_id', 'in', rec_model.user_ids.ids), ('invoice_date', '>=', rec_model.start_date), ('invoice_date', '<=', rec_model.end_date),
              ('state', '=', 'posted')]).mapped('amount_residual'))
         return partner_ledger
 
