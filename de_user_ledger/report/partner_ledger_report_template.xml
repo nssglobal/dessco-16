@@ -50,7 +50,7 @@
 
                             <td style="text-align:right;border:none;" ><t t-esc="debit"/></td>
                             <td style="text-align:right;border:none;"><t t-esc="credit"/></td>
-                            <td style="text-align:right;border:none;"><t t-esc="debit-credit"/></td>
+<!--                             <td style="text-align:right;border:none;"><t t-esc="debit-credit"/></td> -->
                         </tr>
                     </tbody>
                 </table>
