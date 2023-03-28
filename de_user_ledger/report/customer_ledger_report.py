@@ -12,9 +12,9 @@ class CustomerReport(models.AbstractModel):
     def get_user_debit(self, user):
         model = self.env.context.get('active_model')
         rec_model = self.env[model].browse(self.env.context.get('active_id'))
-        partner_ledger = sum(self.env['account.move.line'].search(
-            [('move_id.user_id', '=', user.id), ('date', '>=', rec_model.start_date), ('date', '<=', rec_model.end_date),
-             ('move_id.state', '=', 'posted')], order="date asc").mapped('debit'))
+        partner_ledger = sum(self.env['account.move'].search(
+            [('user_id', '=', user.id), ('invoice_date', '>=', rec_model.start_date), ('date', '<=', rec_model.end_date),
+             ('state', '=', 'posted')], order="date asc").mapped('amount_residual'))
         return partner_ledger
 
     def get_user_credit(self, user):
