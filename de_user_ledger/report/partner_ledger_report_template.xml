@@ -8,27 +8,11 @@
                 <div class="page">
                     <div class="text-center">
                         <h3 class="text-center">Cost Category Summary </h3>
-                        <!--                                                <t t-foreach="request.env['res.users'].search([('id', '=', data['user_id'])])" t-as="prd">-->
-                        <!--                                                    <strong>Name: </strong><span t-field="prd.name"/><br/>-->
-                        <!--                                                    <strong>Address:</strong><span t-field="prd.street"/>-->
-                        <!--                                                </t>-->
-                        <!--                        <div class="row mt64">-->
-                        <!--                            <div class="col-6" >-->
-                        <!--                                <strong>User: </strong> <span t-esc="user.name"/>-->
-                        <!--                            </div>-->
-                        <!--                            <div class="col-6">-->
-                        <!--                                <strong>Print Date: </strong> <span t-esc="print_date"/>-->
-                        <!--                            </div>-->
-                        <!--                        </div>-->
                         <p><span t-esc="data['start_date']" t-options="{'widget': 'date'}"/>  <strong> To </strong><span t-esc="data['end_date']" t-options="{'widget': 'date'}"/></p>
                     </div>
                 </div>
                 <table class="table table-sm" name="account_lines_table">
-<!--                    <tr style="border:1px solid black;">-->
-<!--                        <td rowspan="2" style="border:1px solid black;"><strong>Particulars</strong></td>-->
-<!--                        <td style="border:1px solid black;" class="text-center" colspan="2"><strong>Transactions</strong></td>-->
-<!--                        <td style="border:1px solid black;border-bottom:none;" class="text-center"><strong>Closing</strong></td>-->
-<!--                    </tr>-->
+
                     <tr style="border:1px solid black;">
                         <td style="border:1px solid black;" class="text-center"><strong>Debit</strong></td>
                         <td style="border:1px solid black;" class="text-center"><strong>Credit</strong></td>
@@ -36,16 +20,8 @@
 
                     </tr>
                     <tbody>
-<!--                        <tr>-->
-<!--                            <strong> <td  class="text-left"><strong>Primary Cost Category</strong></td></strong>-->
-<!--                            <td style="border-bottom:1px solid black;text-align:right;"><strong><span t-esc="'{0:,.2f}'.format(get_opening_debit())"/></strong></td>-->
-<!--                            <td style="border-bottom:1px solid black;text-align:right;"><strong><span t-esc="'{0:,.2f}'.format(get_opening_credit())"/></strong></td>-->
-<!--                            <td style="border-bottom:1px solid black;text-align:right;"><strong><span t-esc="'{0:,.2f}'.format(get_opening_debit()-get_opening_credit())"/></strong></td>-->
-<!--                            &lt;!&ndash;                            <td style="border-bottom:1px solid black;" class="text-right"><strong><span t-esc="'{0:,.0f}'.format(int(openbal))"/></strong></td>&ndash;&gt;-->
-<!--                        </tr>-->
+
                         <tr t-foreach="users" t-as="user" style="font-size: 13px;" >
-<!--                            <t t-set="debit" t-value="get_user_debit(user)"/>-->
-<!--                            <t t-set="credit" t-value="get_user_credit(user)"/>-->
                             <td style="border:none;" class="text-left"><span t-esc="user.name"/></td>
 
 <td style="border:none;" class="text-left">
