@@ -48,7 +48,7 @@
 <!--                            <t t-set="credit" t-value="get_user_credit(user)"/>-->
                             <td style="border:none;" class="text-left"><span t-esc="user.name"/></td>
 
-                            <td style="text-align:right;border:none;" ><t t-esc="'{0:,.2f}'.format(debit)"/></td>
+                            <td style="text-align:right;border:none;" ><t t-esc="debit"/></td>
                             <td style="text-align:right;border:none;"><t t-esc="'{0:,.2f}'.format(credit)"/></td>
                             <td style="text-align:right;border:none;"><t t-esc="'{0:,.2f}'.format(debit-credit)"/></td>
                         </tr>
