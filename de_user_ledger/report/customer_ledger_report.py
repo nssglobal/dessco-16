@@ -14,7 +14,7 @@ class CustomerReport(models.AbstractModel):
         rec_model = self.env[model].browse(self.env.context.get('active_id'))
         partner_ledger = sum(self.env['account.move'].search(
             [('user_id', '=', user.id), ('invoice_date', '>=', rec_model.start_date), ('invoice_date', '<=', rec_model.end_date),
-             ('state', '=', 'posted')], order="date asc").mapped('amount_residual'))
+             ('state', '=', 'posted')]).mapped('amount_residual'))
         return partner_ledger
 
     def get_user_credit(self, user):
