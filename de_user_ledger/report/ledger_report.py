@@ -20,7 +20,7 @@ class CustomerReport(models.AbstractModel):
     def get_partner_ledger(self):
         model = self.env.context.get('active_model')
         rec_model = self.env[model].browse(self.env.context.get('active_id'))
-        invoices = self.env['account.move'].search(
+        invoices = self.env['account.move'].search(('move_type', '=', 'out_invoice'),
             [('partner_id', '=', rec_model.partner_id.id), ('invoice_date', '>=', rec_model.start_date), ('invoice_date', '<=', rec_model.end_date),
              ('state', '=', 'posted')], order="invoice_date asc")
         return invoices
