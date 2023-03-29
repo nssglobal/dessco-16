@@ -69,25 +69,25 @@
                                     <span t-esc="partner['name']"/>
                                 </td>
                                 <td class="text-end">
-                                    <span t-esc="partner['direction']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                    <span t-esc="partner['direction']" />
                                 </td>
                                 <td class="text-end">
-                                    <span t-esc="partner['4']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                    <span t-esc="partner['4']" />
                                 </td>
                                 <td class="text-end">
-                                    <span t-esc="partner['3']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                    <span t-esc="partner['3']" />
                                 </td>
                                 <td class="text-end">
-                                    <span t-esc="partner['2']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                    <span t-esc="partner['2']" />
                                 </td>
                                 <td class="text-end">
-                                    <span t-esc="partner['1']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                    <span t-esc="partner['1']" />
                                 </td>
                                 <td class="text-end">
-                                    <span t-esc="partner['0']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                    <span t-esc="partner['0']" />
                                 </td>
                                 <td class="text-end">
-                                    <span t-esc="partner['total']" t-options="{'widget': 'monetary', 'display_currency': res_company.currency_id}"/>
+                                    <span t-esc="partner['total']" />
                                 </td>
                             </tr>
                         </tbody>
